@@ -1,0 +1,52 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "certifications": "Certifications",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "hero": {
+    "tagline": "Construction • Architectural Finishes • Design Innovation",
+    "headline": "Elevating the standard of construction in Puerto Rico",
+    "cta": "View Projects",
+    "cta_secondary": "Contact Us"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive construction and design solutions"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Excellence in every project"
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "subtitle": "Our projects speak for themselves"
+  },
+  "certifications": {
+    "title": "Certifications",
+    "subtitle": "Backed by the best"
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "subtitle": "What our clients say"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Start your project today",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "service": "Service type",
+    "message": "Message",
+    "send": "Send message"
+  },
+  "footer": {
+    "tagline": "Modern Design",
+    "copyright": "© 2025 MasterSpace LLC. All rights reserved.",
+    "crafted": "Crafted with precision"
+  }
+}

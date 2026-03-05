@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Brand Colors — Monochromatic Scale */
+  --color-ms-black: #000000;
+  --color-ms-charcoal: #161515;
+  --color-ms-onyx: #191818;
+  --color-ms-graphite: #2A2828;
+  --color-ms-slate: #4A4747;
+  --color-ms-ash: #8A8686;
+  --color-ms-silver: #C8C4C4;
+  --color-ms-pearl: #F0EDEC;
+  --color-ms-white: #FAFAF9;
+
+  /* Gold Accent Scale */
+  --color-ms-gold: #C9A96E;
+  --color-ms-gold-light: #D4BC8A;
+  --color-ms-gold-dark: #A88B52;
+
+  /* Typography */
+  --font-display: 'PT Serif Caption', Georgia, serif;
+  --font-body: 'Caudex', 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Spacing Scale Extensions */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+
+  /* Animation Timing */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark mode (default) */
+:root {
+  --background: var(--color-ms-onyx);
+  --foreground: var(--color-ms-pearl);
+  --card: var(--color-ms-charcoal);
+  --card-foreground: var(--color-ms-silver);
+  --primary: var(--color-ms-gold);
+  --primary-foreground: var(--color-ms-black);
+  --secondary: var(--color-ms-graphite);
+  --secondary-foreground: var(--color-ms-silver);
+  --muted: var(--color-ms-slate);
+  --muted-foreground: var(--color-ms-ash);
+  --accent: var(--color-ms-gold);
+  --accent-foreground: var(--color-ms-black);
+  --border: var(--color-ms-graphite);
+  --ring: var(--color-ms-gold);
+}
+
+/* Light mode */
+.light {
+  --background: var(--color-ms-white);
+  --foreground: var(--color-ms-onyx);
+  --card: var(--color-ms-pearl);
+  --card-foreground: var(--color-ms-charcoal);
+  --primary: var(--color-ms-gold-dark);
+  --primary-foreground: var(--color-ms-white);
+  --secondary: var(--color-ms-pearl);
+  --secondary-foreground: var(--color-ms-charcoal);
+  --muted: var(--color-ms-silver);
+  --muted-foreground: var(--color-ms-slate);
+  --accent: var(--color-ms-gold-dark);
+  --accent-foreground: var(--color-ms-white);
+  --border: var(--color-ms-silver);
+  --ring: var(--color-ms-gold-dark);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  margin: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 300ms, color 300ms;
+}
