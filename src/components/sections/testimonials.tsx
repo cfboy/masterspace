@@ -1,28 +1,27 @@
-import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
-import { SectionHeading } from '@/components/ui/section-heading'
-import { cn } from '@/lib/utils'
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const testimonialKeys = ['t1', 't2', 't3'] as const
+import { AnimatePresence, motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+
+import { SectionHeading } from '@/components/ui/section-heading';
+import { cn } from '@/lib/utils';
+
+const testimonialKeys = ['t1', 't2', 't3'] as const;
 
 export function Testimonials() {
-  const { t } = useTranslation()
-  const [current, setCurrent] = useState(0)
+  const { t } = useTranslation();
+  const [current, setCurrent] = useState(0);
 
-  const prev = () => setCurrent((c) => (c === 0 ? testimonialKeys.length - 1 : c - 1))
-  const next = () => setCurrent((c) => (c === testimonialKeys.length - 1 ? 0 : c + 1))
+  const prev = () => setCurrent((c) => (c === 0 ? testimonialKeys.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === testimonialKeys.length - 1 ? 0 : c + 1));
 
-  const key = testimonialKeys[current]
+  const key = testimonialKeys[current];
 
   return (
-    <section id="testimonios" className="py-20 md:py-28 px-6">
-      <div className="max-w-4xl mx-auto">
-        <SectionHeading
-          title={t('testimonials.title')}
-          subtitle={t('testimonials.subtitle')}
-        />
+    <section id="testimonios" className="px-6 py-20 md:py-28">
+      <div className="mx-auto max-w-4xl">
+        <SectionHeading title={t('testimonials.title')} subtitle={t('testimonials.subtitle')} />
 
         <div className="relative">
           <AnimatePresence mode="wait">
@@ -34,24 +33,24 @@ export function Testimonials() {
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="text-center"
             >
-              <Quote size={40} className="text-[var(--primary)]/30 mx-auto mb-6" />
-              <blockquote className="font-body text-lg md:text-xl text-[var(--foreground)] italic leading-relaxed mb-6 max-w-2xl mx-auto">
+              <Quote size={40} className="text-primary/30 mx-auto mb-6" />
+              <blockquote className="font-body text-foreground mx-auto mb-6 max-w-2xl text-lg leading-relaxed italic md:text-xl">
                 "{t(`testimonials.items.${key}.quote`)}"
               </blockquote>
-              <p className="font-display text-base text-[var(--primary)]">
+              <p className="font-display text-primary text-base">
                 {t(`testimonials.items.${key}.name`)}
               </p>
-              <p className="font-sans text-sm text-[var(--muted-foreground)]">
+              <p className="text-muted-foreground font-sans text-sm">
                 {t(`testimonials.items.${key}.project`)}
               </p>
             </motion.div>
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-10">
+          <div className="mt-10 flex items-center justify-center gap-4">
             <button
               onClick={prev}
-              className="p-2 rounded-full border border-[var(--border)] text-[var(--muted-foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"
+              className="border-border text-muted-foreground hover:border-primary hover:text-primary rounded-full border p-2 transition-colors"
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={18} />
@@ -63,8 +62,8 @@ export function Testimonials() {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={cn(
-                    'w-2 h-2 rounded-full transition-colors',
-                    i === current ? 'bg-[var(--primary)]' : 'bg-[var(--border)]',
+                    'h-2 w-2 rounded-full transition-colors',
+                    i === current ? 'bg-primary' : 'bg-border'
                   )}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
@@ -73,7 +72,7 @@ export function Testimonials() {
 
             <button
               onClick={next}
-              className="p-2 rounded-full border border-[var(--border)] text-[var(--muted-foreground)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-colors"
+              className="border-border text-muted-foreground hover:border-primary hover:text-primary rounded-full border p-2 transition-colors"
               aria-label="Next testimonial"
             >
               <ChevronRight size={18} />
@@ -82,5 +81,5 @@ export function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }

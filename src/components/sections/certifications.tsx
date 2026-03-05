@@ -1,26 +1,25 @@
-import { useTranslation } from 'react-i18next'
-import { motion } from 'framer-motion'
-import { Award, ShieldCheck, HardHat } from 'lucide-react'
-import { SectionHeading } from '@/components/ui/section-heading'
+import { useTranslation } from 'react-i18next';
+
+import { motion } from 'framer-motion';
+import { Award, HardHat, ShieldCheck } from 'lucide-react';
+
+import { SectionHeading } from '@/components/ui/section-heading';
 
 const certs = [
   { key: 'inimitez', Icon: Award },
   { key: 'ambience', Icon: ShieldCheck },
   { key: 'osha', Icon: HardHat },
-] as const
+] as const;
 
 export function Certifications() {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   return (
-    <section id="certificaciones" className="py-20 md:py-28 px-6 bg-[var(--card)]">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeading
-          title={t('certifications.title')}
-          subtitle={t('certifications.subtitle')}
-        />
+    <section id="certificaciones" className="bg-card px-6 py-20 md:py-28">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading title={t('certifications.title')} subtitle={t('certifications.subtitle')} />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {certs.map(({ key, Icon }, i) => (
             <motion.div
               key={key}
@@ -32,18 +31,18 @@ export function Certifications() {
                 duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="text-center bg-[var(--background)] border border-[var(--border)] rounded-lg p-8"
+              className="border-border bg-background rounded-lg border p-8 text-center"
             >
-              <div className="w-16 h-16 rounded-full bg-[var(--primary)]/10 flex items-center justify-center mx-auto mb-5">
-                <Icon size={28} className="text-[var(--primary)]" />
+              <div className="bg-primary/10 mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full">
+                <Icon size={28} className="text-primary" />
               </div>
-              <h3 className="font-display text-lg text-[var(--foreground)] mb-1">
+              <h3 className="font-display text-foreground mb-1 text-lg">
                 {t(`certifications.items.${key}.title`)}
               </h3>
-              <p className="font-sans text-xs text-[var(--primary)] tracking-wide uppercase mb-3">
+              <p className="text-primary mb-3 font-sans text-xs tracking-wide uppercase">
                 {t(`certifications.items.${key}.institution`)}
               </p>
-              <p className="font-body text-sm text-[var(--muted-foreground)] leading-relaxed">
+              <p className="font-body text-muted-foreground text-sm leading-relaxed">
                 {t(`certifications.items.${key}.description`)}
               </p>
             </motion.div>
@@ -51,5 +50,5 @@ export function Certifications() {
         </div>
       </div>
     </section>
-  )
+  );
 }
