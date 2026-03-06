@@ -1,48 +1,48 @@
 import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
-import { Award, HardHat, ShieldCheck } from 'lucide-react';
 
-import { SectionHeading } from '@/components/ui/section-heading';
-
-const certs = [
-  { key: 'inimitez', Icon: Award },
-  { key: 'ambience', Icon: ShieldCheck },
-  { key: 'osha', Icon: HardHat },
-] as const;
+const certs = ['inimitez', 'ambience', 'osha'] as const;
 
 export function Certifications() {
   const { t } = useTranslation();
 
   return (
-    <section id="certificaciones" className="bg-card px-6 py-20 md:py-28">
+    <section id="certificaciones" className="bg-card px-6 py-24 md:px-12 md:py-36">
       <div className="mx-auto max-w-7xl">
-        <SectionHeading title={t('certifications.title')} subtitle={t('certifications.subtitle')} />
+        {/* Header */}
+        <div className="mb-16 flex items-center gap-6">
+          <span className="font-sans text-[10px] tracking-[0.25em] text-primary uppercase">
+            {t('nav.certifications')}
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {certs.map(({ key, Icon }, i) => (
+        {/* Horizontal list — editorial */}
+        <div className="grid grid-cols-1 divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0">
+          {certs.map((key, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                delay: i * 0.15,
-                duration: 0.6,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="border-border bg-background rounded-lg border p-8 text-center"
+              transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              className="px-0 py-10 md:px-10 md:py-0 first:pt-0 last:pb-0 md:first:pl-0 md:last:pr-0"
             >
-              <div className="bg-primary/10 mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full">
-                <Icon size={28} className="text-primary" />
-              </div>
-              <h3 className="font-display text-foreground mb-1 text-lg">
-                {t(`certifications.items.${key}.title`)}
-              </h3>
-              <p className="text-primary mb-3 font-sans text-xs tracking-wide uppercase">
+              {/* Index */}
+              <p className="mb-6 font-sans text-[10px] tabular-nums text-muted-foreground">
+                {String(i + 1).padStart(2, '0')}
+              </p>
+              {/* Institution tag */}
+              <p className="mb-2 font-sans text-[10px] tracking-[0.2em] text-primary uppercase">
                 {t(`certifications.items.${key}.institution`)}
               </p>
-              <p className="font-body text-muted-foreground text-sm leading-relaxed">
+              {/* Title */}
+              <h3 className="font-display mb-4 text-xl text-foreground md:text-2xl">
+                {t(`certifications.items.${key}.title`)}
+              </h3>
+              {/* Description */}
+              <p className="font-body text-sm leading-relaxed text-muted-foreground">
                 {t(`certifications.items.${key}.description`)}
               </p>
             </motion.div>

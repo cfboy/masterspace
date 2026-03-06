@@ -58,7 +58,10 @@
       "technique": "Técnica Avanzada",
       "quality": "Control de Calidad"
     },
-    "image_placeholder": "Foto del proyecto"
+    "image_placeholder": "Foto del proyecto",
+    "stat_years": "Años de experiencia",
+    "stat_projects": "Proyectos completados",
+    "stat_certs": "Certificaciones"
   },
   "portfolio": {
     "title": "Portafolio",
@@ -72,14 +75,30 @@
       "coatings": "Revestimientos"
     },
     "projects": {
-      "project1": { "title": "Remodelación Villa Marina" },
-      "project2": { "title": "Restaurante Rooftop San Juan" },
-      "project3": { "title": "Estuco Veneciano Condado" },
-      "project4": { "title": "Pared de Piedra Dorado" },
-      "project5": { "title": "Cocina Moderna Guaynabo" },
-      "project6": { "title": "Oficinas Corporativas Hato Rey" },
-      "project7": { "title": "Microcemento Residencial" },
-      "project8": { "title": "Revestimiento Ladrillo Isla Verde" }
+      "project1": {
+        "title": "La Fresquería — Mayagüez"
+      },
+      "project2": {
+        "title": "La Fresquería — Acabados"
+      },
+      "project3": {
+        "title": "La Fresquería — Revestimiento"
+      },
+      "project4": {
+        "title": "La Fresquería — Detalle Interior"
+      },
+      "project5": {
+        "title": "La Fresquería — Fachada"
+      },
+      "project6": {
+        "title": "La Fresquería — Espacio Comercial"
+      },
+      "project7": {
+        "title": "La Fresquería — Terminaciones"
+      },
+      "project8": {
+        "title": "Vibra The Rooftop — Mayagüez"
+      }
     }
   },
   "certifications": {

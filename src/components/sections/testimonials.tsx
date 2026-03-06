@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
-import { SectionHeading } from '@/components/ui/section-heading';
 import { cn } from '@/lib/utils';
 
 const testimonialKeys = ['t1', 't2', 't3'] as const;
@@ -12,72 +10,71 @@ const testimonialKeys = ['t1', 't2', 't3'] as const;
 export function Testimonials() {
   const { t } = useTranslation();
   const [current, setCurrent] = useState(0);
-
-  const prev = () => setCurrent((c) => (c === 0 ? testimonialKeys.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === testimonialKeys.length - 1 ? 0 : c + 1));
-
   const key = testimonialKeys[current];
 
   return (
-    <section id="testimonios" className="px-6 py-20 md:py-28">
-      <div className="mx-auto max-w-4xl">
-        <SectionHeading title={t('testimonials.title')} subtitle={t('testimonials.subtitle')} />
+    <section id="testimonios" className="px-6 py-24 md:px-12 md:py-36">
+      <div className="mx-auto max-w-7xl">
+        {/* Header */}
+        <div className="mb-20 flex items-center gap-6">
+          <span className="font-sans text-[10px] tracking-[0.25em] text-primary uppercase">
+            {t('nav.testimonials')}
+          </span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
 
-        <div className="relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={key}
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="text-center"
-            >
-              <Quote size={40} className="text-primary/30 mx-auto mb-6" />
-              <blockquote className="font-body text-foreground mx-auto mb-6 max-w-2xl text-lg leading-relaxed italic md:text-xl">
-                "{t(`testimonials.items.${key}.quote`)}"
-              </blockquote>
-              <p className="font-display text-primary text-base">
-                {t(`testimonials.items.${key}.name`)}
-              </p>
-              <p className="text-muted-foreground font-sans text-sm">
-                {t(`testimonials.items.${key}.project`)}
-              </p>
-            </motion.div>
-          </AnimatePresence>
+        {/* Large editorial quote */}
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_2fr] lg:gap-24">
+          {/* Left — attribution + nav */}
+          <div className="flex flex-col justify-between gap-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={key}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <p className="font-display text-lg text-primary">
+                  {t(`testimonials.items.${key}.name`)}
+                </p>
+                <p className="mt-1 font-sans text-xs tracking-wide text-muted-foreground">
+                  {t(`testimonials.items.${key}.project`)}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-          {/* Navigation */}
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <button
-              onClick={prev}
-              className="border-border text-muted-foreground hover:border-primary hover:text-primary rounded-full border p-2 transition-colors"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeft size={18} />
-            </button>
-
-            <div className="flex gap-2">
+            {/* Dot navigation */}
+            <div className="flex items-center gap-4">
               {testimonialKeys.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
+                  aria-label={`Testimonio ${i + 1}`}
                   className={cn(
-                    'h-2 w-2 rounded-full transition-colors',
-                    i === current ? 'bg-primary' : 'bg-border'
+                    'h-px transition-all duration-300',
+                    i === current
+                      ? 'w-10 bg-primary'
+                      : 'w-4 bg-border hover:bg-muted-foreground'
                   )}
-                  aria-label={`Go to testimonial ${i + 1}`}
                 />
               ))}
             </div>
-
-            <button
-              onClick={next}
-              className="border-border text-muted-foreground hover:border-primary hover:text-primary rounded-full border p-2 transition-colors"
-              aria-label="Next testimonial"
-            >
-              <ChevronRight size={18} />
-            </button>
           </div>
+
+          {/* Right — large quote text */}
+          <AnimatePresence mode="wait">
+            <motion.blockquote
+              key={key}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="font-display text-2xl leading-snug text-foreground italic md:text-3xl lg:text-4xl"
+            >
+              &ldquo;{t(`testimonials.items.${key}.quote`)}&rdquo;
+            </motion.blockquote>
+          </AnimatePresence>
         </div>
       </div>
     </section>

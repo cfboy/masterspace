@@ -1,16 +1,17 @@
 import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+
+import watermarkUrl from '@/assets/watermark/white-watermark@2x.png';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as const } },
+};
 
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.2 } },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } },
+  show: { transition: { staggerChildren: 0.15 } },
 };
 
 export function Hero() {
@@ -19,71 +20,99 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="relative flex min-h-svh flex-col overflow-hidden pt-24 pb-16 md:pt-32 md:pb-28"
     >
-      {/* Background gradient overlay */}
-      <div className="from-ms-black/80 via-ms-onyx/70 to-ms-onyx absolute inset-0 bg-gradient-to-b" />
+      {/* Background */}
+      <div className="absolute inset-0 bg-ms-black" />
+      {/* Subtle grain */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==')] opacity-[0.04]" />
 
-      {/* Subtle grain texture */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==')] opacity-[0.03]" />
+      {/* Brand watermark — bottom-right, very subtle — hidden on small screens */}
+      <img
+        src={watermarkUrl}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute right-8 bottom-20 hidden w-56 select-none opacity-[0.06] sm:block md:w-72"
+      />
+
+      {/* Large background monogram — desktop only */}
+      <motion.span
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.035 }}
+        transition={{ duration: 2, delay: 0.5 }}
+        className="font-display pointer-events-none absolute right-[-0.02em] bottom-[-0.08em] hidden select-none text-[22vw] leading-none text-ms-white lg:block"
+        aria-hidden="true"
+      >
+        MS
+      </motion.span>
+
+      {/* Vertical rule — left accent — only on wider screens where it aligns with content edge */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 1.2, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        style={{ transformOrigin: 'top' }}
+        className="absolute top-0 left-6 hidden h-full w-px bg-ms-gold/30 md:left-12 md:block"
+      />
+
+      {/* Spacer pushes content toward bottom on tall screens */}
+      <div className="flex-1" />
 
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto max-w-4xl px-6 text-center"
+        className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-12"
       >
-        {/* Tagline */}
-        <motion.p
-          variants={fadeUp}
-          className="text-ms-gold mb-6 font-sans text-sm tracking-[0.2em] uppercase md:text-base"
-        >
-          {t('hero.tagline')}
-        </motion.p>
+        {/* Eyebrow */}
+        <motion.div variants={fadeUp} className="mb-6 flex items-center gap-4 md:mb-8">
+          <span className="h-px w-8 bg-ms-gold md:w-10" />
+          <span className="font-sans text-[10px] tracking-[0.25em] text-ms-gold uppercase md:text-xs">
+            {t('hero.tagline')}
+          </span>
+        </motion.div>
 
-        {/* Headline */}
+        {/* Headline — large editorial type */}
         <motion.h1
           variants={fadeUp}
-          className="font-display text-ms-white text-4xl leading-tight md:text-5xl lg:text-6xl xl:text-7xl"
+          className="font-display max-w-4xl text-[2.5rem] leading-[1.08] text-ms-white sm:text-5xl md:text-7xl lg:text-8xl xl:text-[6rem]"
         >
           {t('hero.headline')}
         </motion.h1>
 
-        {/* CTAs */}
+        {/* Bottom row — CTAs + location */}
         <motion.div
           variants={fadeUp}
-          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between md:mt-14"
         >
-          <a
-            href="#portafolio"
-            className="bg-ms-gold text-ms-black font-body hover:bg-ms-gold-light rounded px-8 py-3.5 font-bold transition-colors"
-          >
-            {t('hero.cta')}
-          </a>
-          <a
-            href="#contacto"
-            className="border-ms-gold text-ms-gold font-body hover:bg-ms-gold hover:text-ms-black rounded border px-8 py-3.5 font-bold transition-colors"
-          >
-            {t('hero.cta_secondary')}
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href="#portafolio"
+              className="font-body bg-ms-gold px-6 py-3 text-sm font-bold text-ms-black transition-opacity hover:opacity-85 md:px-7"
+            >
+              {t('hero.cta')}
+            </a>
+            <a
+              href="#contacto"
+              className="font-body border border-ms-white/20 px-6 py-3 text-sm text-ms-white/70 transition-colors hover:border-ms-gold hover:text-ms-gold md:px-7"
+            >
+              {t('hero.cta_secondary')}
+            </a>
+          </div>
+          <p className="font-sans text-[10px] tracking-[0.2em] text-ms-ash uppercase md:text-xs">
+            Puerto Rico
+          </p>
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.a
-        href="#servicios"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="text-ms-gold/60 hover:text-ms-gold absolute bottom-8 left-1/2 -translate-x-1/2 transition-colors"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ChevronDown size={28} />
-        </motion.div>
-      </motion.a>
+      {/* Scroll line */}
+      <motion.div
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: 1 }}
+        transition={{ duration: 1.5, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        style={{ transformOrigin: 'top' }}
+        className="absolute bottom-0 left-1/2 h-12 w-px -translate-x-1/2 bg-ms-gold/40 md:h-16"
+      />
     </section>
   );
 }

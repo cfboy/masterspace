@@ -58,7 +58,10 @@
       "technique": "Advanced Technique",
       "quality": "Quality Control"
     },
-    "image_placeholder": "Project photo"
+    "image_placeholder": "Project photo",
+    "stat_years": "Years of experience",
+    "stat_projects": "Projects completed",
+    "stat_certs": "Certifications"
   },
   "portfolio": {
     "title": "Portfolio",
@@ -72,14 +75,30 @@
       "coatings": "Coatings"
     },
     "projects": {
-      "project1": { "title": "Villa Marina Remodel" },
-      "project2": { "title": "Rooftop Restaurant San Juan" },
-      "project3": { "title": "Venetian Plaster Condado" },
-      "project4": { "title": "Stone Wall Dorado" },
-      "project5": { "title": "Modern Kitchen Guaynabo" },
-      "project6": { "title": "Corporate Offices Hato Rey" },
-      "project7": { "title": "Residential Microcement" },
-      "project8": { "title": "Brick Coating Isla Verde" }
+      "project1": {
+        "title": "La Fresquería — Mayagüez"
+      },
+      "project2": {
+        "title": "La Fresquería — Finishes"
+      },
+      "project3": {
+        "title": "La Fresquería — Coating"
+      },
+      "project4": {
+        "title": "La Fresquería — Interior Detail"
+      },
+      "project5": {
+        "title": "La Fresquería — Facade"
+      },
+      "project6": {
+        "title": "La Fresquería — Commercial Space"
+      },
+      "project7": {
+        "title": "La Fresquería — Final Touches"
+      },
+      "project8": {
+        "title": "Vibra The Rooftop — Mayagüez"
+      }
     }
   },
   "certifications": {

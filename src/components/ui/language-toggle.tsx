@@ -7,14 +7,12 @@ export function LanguageToggle() {
   const isES = i18n.language === 'es';
 
   return (
-    <div className="border-border flex items-center overflow-hidden rounded border font-sans text-sm">
+    <div className="flex items-center overflow-hidden rounded border border-border font-sans text-sm">
       <button
         onClick={() => i18n.changeLanguage('es')}
         className={cn(
           'px-2.5 py-1 transition-colors',
-          isES
-            ? 'bg-primary text-primary-foreground'
-            : 'text-muted-foreground hover:text-foreground'
+          isES ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
         )}
       >
         ES
@@ -23,9 +21,7 @@ export function LanguageToggle() {
         onClick={() => i18n.changeLanguage('en')}
         className={cn(
           'px-2.5 py-1 transition-colors',
-          !isES
-            ? 'bg-primary text-primary-foreground'
-            : 'text-muted-foreground hover:text-foreground'
+          !isES ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
         )}
       >
         EN
