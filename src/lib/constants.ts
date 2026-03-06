@@ -6,12 +6,12 @@ export const NAV_LINKS = [
   { key: 'nav.certifications', href: '#certificaciones' },
   { key: 'nav.testimonials', href: '#testimonios' },
   { key: 'nav.contact', href: '#contacto' },
-] as const
+] as const;
 
 export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/masterspacellc/',
   facebook: 'https://www.facebook.com/masterspacellc/',
-} as const
+} as const;
 
 export const CONTACT_INFO = {
   phone: '(787) 546-7168',
@@ -19,4 +19,4 @@ export const CONTACT_INFO = {
   email: 'masterspacellc@gmail.com',
   emailHref: 'mailto:masterspacellc@gmail.com',
   location: 'Puerto Rico',
-} as const
+} as const;
