@@ -15,12 +15,12 @@ const sectionIds = NAV_LINKS.map((l) => l.href.slice(1));
 
 export function Navbar() {
   const { t } = useTranslation();
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 10);
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeId = useScrollSpy(sectionIds);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60);
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -37,21 +37,17 @@ export function Navbar() {
       {/* When not scrolled, force dark token values so all children render correctly over the dark Hero */}
       <nav
         className={cn(
-          'fixed top-0 right-0 left-0 z-50 transition-all duration-500',
-          scrolled ? 'bg-background/90 backdrop-blur-md border-b border-border' : 'bg-transparent'
+          'fixed top-0 right-0 left-0 z-50 border-b transition-[background-color,border-color] duration-300',
+          scrolled
+            ? 'border-border bg-background/90 backdrop-blur-md'
+            : 'border-transparent bg-transparent text-ms-white [--primary:var(--color-ms-gold)] [--muted-foreground:var(--color-ms-ash)] [--foreground:var(--color-ms-white)]'
         )}
-        style={!scrolled ? {
-          '--primary': 'var(--color-ms-gold)',
-          '--primary-foreground': 'var(--color-ms-black)',
-          '--muted-foreground': 'var(--color-ms-ash)',
-          '--foreground': 'var(--color-ms-white)',
-          '--border': 'var(--color-ms-graphite)',
-        } as React.CSSProperties : undefined}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20 md:px-12">
           {/* Logo */}
           <a href="#inicio" aria-label="MasterSpace LLC — inicio">
-            <Logo width={120} className="text-primary" />
+            <Logo width={76} className="text-primary md:hidden" />
+            <Logo width={110} className="text-primary hidden md:block" />
           </a>
 
           {/* Desktop nav — center */}

@@ -1,4 +1,5 @@
 import LogoSvg from '@/assets/logo.svg?react';
+import { cn } from '@/lib/utils';
 
 interface LogoProps {
   /** CSS color — applied via `currentColor` on all SVG fills */
@@ -18,8 +19,8 @@ export function Logo({ color, width = 160, className }: LogoProps) {
 
   return (
     <span
-      style={{ color: color, display: 'inline-flex', width, height, flexShrink: 0 }}
-      className={className}
+      style={{ color: color, width, height, flexShrink: 0 }}
+      className={cn('inline-flex', className)}
       aria-label="MasterSpace LLC"
     >
       <LogoSvg

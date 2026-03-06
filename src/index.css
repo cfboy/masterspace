@@ -89,6 +89,13 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem; /* matches mobile navbar h-16 */
+}
+
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 5rem; /* matches desktop navbar h-20 */
+  }
 }
 
 body {
@@ -102,4 +109,11 @@ body {
   transition:
     background-color 300ms,
     color 300ms;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

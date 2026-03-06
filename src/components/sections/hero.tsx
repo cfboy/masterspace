@@ -21,7 +21,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-svh flex-col overflow-hidden pt-24 pb-16 md:pt-32 md:pb-28"
+      className="relative flex min-h-svh flex-col overflow-hidden md:items-start md:justify-end md:pt-32 md:pb-28"
     >
       {/* Background texture photo */}
       <div className="absolute inset-0">
@@ -58,17 +58,14 @@ export function Hero() {
         className="absolute top-0 left-6 hidden h-full w-px bg-ms-gold/30 md:left-12 md:block"
       />
 
-      {/* Spacer pushes content toward bottom on tall screens */}
-      <div className="flex-1" />
-
       <motion.div
         variants={stagger}
         initial="hidden"
         animate="show"
-        className="relative z-10 mx-auto w-full max-w-7xl px-6 md:px-12"
+        className="relative z-10 mx-auto flex min-h-svh w-full max-w-7xl flex-col items-center justify-center px-6 pt-20 pb-20 text-center md:min-h-0 md:items-start md:px-12 md:pt-0 md:pb-0 md:text-left"
       >
         {/* Eyebrow */}
-        <motion.div variants={fadeUp} className="mb-6 flex items-center gap-4 md:mb-8">
+        <motion.div variants={fadeUp} className="mb-6 flex items-center justify-center gap-4 md:mb-8 md:justify-start">
           <span className="h-px w-8 bg-ms-gold md:w-10" />
           <span className="font-sans text-xs tracking-[0.25em] text-ms-gold uppercase md:text-sm">
             {t('hero.tagline')}
@@ -86,9 +83,9 @@ export function Hero() {
         {/* Bottom row — CTAs + location */}
         <motion.div
           variants={fadeUp}
-          className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between md:mt-14"
+          className="mt-10 flex flex-col items-center gap-5 md:mt-14 md:flex-row md:items-end md:justify-between"
         >
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap justify-center gap-3 md:justify-start">
             <a
               href="#portafolio"
               className="font-body bg-ms-gold px-6 py-3 text-sm font-bold text-ms-black transition-opacity hover:opacity-85 md:px-7"
