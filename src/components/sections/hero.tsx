@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
+import heroBg from '@/assets/top-view-dark-background-texture.jpg';
 import watermarkUrl from '@/assets/watermark/white-watermark@2x.png';
 
 const fadeUp = {
@@ -22,10 +23,12 @@ export function Hero() {
       id="inicio"
       className="relative flex min-h-svh flex-col overflow-hidden pt-24 pb-16 md:pt-32 md:pb-28"
     >
-      {/* Background */}
-      <div className="absolute inset-0 bg-ms-black" />
-      {/* Subtle grain */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==')] opacity-[0.04]" />
+      {/* Background texture photo */}
+      <div className="absolute inset-0">
+        <img src={heroBg} alt="" aria-hidden="true" className="h-full w-full object-cover object-center" />
+        {/* Dark overlay to maintain legibility */}
+        <div className="absolute inset-0 bg-ms-black/70" />
+      </div>
 
       {/* Brand watermark — bottom-right, very subtle — hidden on small screens */}
       <img
@@ -67,7 +70,7 @@ export function Hero() {
         {/* Eyebrow */}
         <motion.div variants={fadeUp} className="mb-6 flex items-center gap-4 md:mb-8">
           <span className="h-px w-8 bg-ms-gold md:w-10" />
-          <span className="font-sans text-[10px] tracking-[0.25em] text-ms-gold uppercase md:text-xs">
+          <span className="font-sans text-xs tracking-[0.25em] text-ms-gold uppercase md:text-sm">
             {t('hero.tagline')}
           </span>
         </motion.div>
@@ -99,7 +102,7 @@ export function Hero() {
               {t('hero.cta_secondary')}
             </a>
           </div>
-          <p className="font-sans text-[10px] tracking-[0.2em] text-ms-ash uppercase md:text-xs">
+          <p className="font-sans text-xs tracking-[0.2em] text-ms-ash uppercase md:text-sm">
             Puerto Rico
           </p>
         </motion.div>

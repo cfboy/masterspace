@@ -34,7 +34,7 @@ export function About() {
           {stats.map(({ value, labelKey }) => (
             <div key={labelKey} className="flex-1 px-6 py-6 text-center md:py-8">
               <p className="font-display text-3xl text-ms-gold md:text-4xl">{value}</p>
-              <p className="mt-1 font-sans text-[10px] tracking-[0.15em] text-ms-ash uppercase">
+              <p className="mt-1 font-sans text-xs tracking-[0.15em] text-ms-ash uppercase">
                 {t(labelKey as string)}
               </p>
             </div>
@@ -52,24 +52,24 @@ export function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <span className="mb-10 block font-sans text-[10px] tracking-[0.25em] text-primary uppercase">
+            <span className="mb-10 block font-sans text-xs tracking-[0.25em] text-primary uppercase">
               {t('nav.about')}
             </span>
             <div className="space-y-8">
               <div>
-                <p className="mb-2 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="mb-2 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('about.mission_title')}
                 </p>
-                <p className="font-body text-sm leading-relaxed text-card-foreground">
+                <p className="font-body text-base leading-relaxed text-card-foreground">
                   {t('about.mission')}
                 </p>
               </div>
               <div className="h-px bg-border" />
               <div>
-                <p className="mb-2 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="mb-2 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('about.vision_title')}
                 </p>
-                <p className="font-body text-sm leading-relaxed text-card-foreground">
+                <p className="font-body text-base leading-relaxed text-card-foreground">
                   {t('about.vision')}
                 </p>
               </div>
@@ -91,7 +91,7 @@ export function About() {
               {(['structure', 'design', 'technique', 'quality'] as const).map((key) => (
                 <span
                   key={key}
-                  className="border border-border px-4 py-1.5 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase"
+                  className="border border-border px-4 py-1.5 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase"
                 >
                   {t(`about.badges.${key}`)}
                 </span>

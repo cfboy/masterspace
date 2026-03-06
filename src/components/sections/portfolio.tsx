@@ -60,10 +60,10 @@ export function Portfolio() {
         {/* Header row — label left, filters right */}
         <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <span className="text-primary mb-3 block font-sans text-[10px] tracking-[0.25em] uppercase">
+            <span className="text-primary mb-3 block font-sans text-xs tracking-[0.25em] uppercase">
               {t('nav.portfolio')}
             </span>
-            <h2 className="font-display text-foreground text-3xl md:text-4xl">
+            <h2 className="font-display text-foreground text-3xl md:text-5xl">
               {t('portfolio.title')}
             </h2>
           </div>
@@ -113,14 +113,14 @@ export function Portfolio() {
                 {/* Project number overlay — bottom left */}
                 <div className="from-ms-black/80 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div>
-                    <p className="text-ms-gold font-sans text-[10px] tracking-[0.2em] uppercase">
+                    <p className="text-ms-gold font-sans text-xs tracking-[0.2em] uppercase">
                       {t(`portfolio.filters.${project.category}`)}
                     </p>
-                    <h4 className="font-display text-ms-white text-sm md:text-base">
+                    <h4 className="font-display text-ms-white text-base md:text-lg">
                       {t(`portfolio.projects.${project.key}.title`)}
                     </h4>
                   </div>
-                  <span className="text-ms-ash font-sans text-[10px] tabular-nums">
+                  <span className="text-ms-ash font-sans text-xs tabular-nums">
                     {String(i + 1).padStart(2, '0')}
                   </span>
                 </div>

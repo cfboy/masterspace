@@ -14,14 +14,14 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Logo width={180} className="mb-4 text-primary" />
-            <p className="font-body max-w-xs text-sm leading-relaxed text-ms-ash">
+            <p className="font-body max-w-xs text-base leading-relaxed text-ms-ash">
               {t('hero.tagline')}
             </p>
           </div>
 
           {/* Nav */}
           <div>
-            <p className="mb-6 font-sans text-[10px] tracking-[0.2em] text-ms-slate uppercase">
+            <p className="mb-6 font-sans text-xs tracking-[0.2em] text-ms-slate uppercase">
               {t('footer.links')}
             </p>
             <nav className="flex flex-col gap-3">
@@ -29,7 +29,7 @@ export function Footer() {
                 <a
                   key={link.key}
                   href={link.href}
-                  className="font-body text-sm text-ms-ash transition-colors hover:text-ms-gold"
+                  className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
                 >
                   {t(link.key)}
                 </a>
@@ -39,19 +39,19 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="mb-6 font-sans text-[10px] tracking-[0.2em] text-ms-slate uppercase">
+            <p className="mb-6 font-sans text-xs tracking-[0.2em] text-ms-slate uppercase">
               {t('contact.title')}
             </p>
             <div className="flex flex-col gap-3">
               <a
                 href={CONTACT_INFO.phoneHref}
-                className="font-body text-sm text-ms-ash transition-colors hover:text-ms-gold"
+                className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
               >
                 {CONTACT_INFO.phone}
               </a>
               <a
                 href={CONTACT_INFO.emailHref}
-                className="font-body text-sm text-ms-ash transition-colors hover:text-ms-gold"
+                className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
               >
                 {CONTACT_INFO.email}
               </a>

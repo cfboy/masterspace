@@ -21,7 +21,7 @@ export function Contact() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-16 flex items-center gap-6">
-          <span className="font-sans text-[10px] tracking-[0.25em] text-primary uppercase">
+          <span className="font-sans text-xs tracking-[0.25em] text-primary uppercase">
             {t('nav.contact')}
           </span>
           <div className="h-px flex-1 bg-border" />
@@ -42,31 +42,31 @@ export function Contact() {
             {/* Contact info — minimal list */}
             <div className="space-y-6">
               <div>
-                <p className="mb-1 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('contact.phone_label')}
                 </p>
                 <a
                   href={CONTACT_INFO.phoneHref}
-                  className="font-body text-foreground transition-colors hover:text-primary"
+                  className="font-body text-base text-foreground transition-colors hover:text-primary"
                 >
                   {CONTACT_INFO.phone}
                 </a>
               </div>
               <div className="h-px bg-border" />
               <div>
-                <p className="mb-1 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('contact.email_label')}
                 </p>
                 <a
                   href={CONTACT_INFO.emailHref}
-                  className="font-body text-foreground transition-colors hover:text-primary"
+                  className="font-body text-base text-foreground transition-colors hover:text-primary"
                 >
                   {CONTACT_INFO.email}
                 </a>
               </div>
               <div className="h-px bg-border" />
               <div>
-                <p className="mb-1 font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('contact.location_label')}
                 </p>
                 <p className="font-body text-foreground">{CONTACT_INFO.location}</p>
@@ -113,7 +113,7 @@ export function Contact() {
                   { label: t('contact.phone'), type: 'tel', required: false },
                 ].map(({ label, type, required }) => (
                   <div key={label} className="group">
-                    <label className="mb-2 block font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                    <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                       {label}
                     </label>
                     <input
@@ -125,7 +125,7 @@ export function Contact() {
                 ))}
 
                 <div>
-                  <label className="mb-2 block font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                  <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                     {t('contact.service')}
                   </label>
                   <select
@@ -143,7 +143,7 @@ export function Contact() {
                 </div>
 
                 <div>
-                  <label className="mb-2 block font-sans text-[10px] tracking-[0.15em] text-muted-foreground uppercase">
+                  <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                     {t('contact.message')}
                   </label>
                   <textarea

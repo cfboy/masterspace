@@ -17,7 +17,7 @@ export function Testimonials() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-20 flex items-center gap-6">
-          <span className="font-sans text-[10px] tracking-[0.25em] text-primary uppercase">
+          <span className="font-sans text-xs tracking-[0.25em] text-primary uppercase">
             {t('nav.testimonials')}
           </span>
           <div className="h-px flex-1 bg-border" />
@@ -35,10 +35,10 @@ export function Testimonials() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               >
-                <p className="font-display text-lg text-primary">
+                <p className="font-display text-xl text-primary">
                   {t(`testimonials.items.${key}.name`)}
                 </p>
-                <p className="mt-1 font-sans text-xs tracking-wide text-muted-foreground">
+                <p className="mt-1 font-sans text-sm tracking-wide text-muted-foreground">
                   {t(`testimonials.items.${key}.project`)}
                 </p>
               </motion.div>
