@@ -1,9 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-// Unsplash placeholder — architectural interior finishes
-const HERO_IMG =
-  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80&auto=format&fit=crop';
+import windowMockup from '@/assets/mockups/Window.jpg';
 
 const stats = [
   { value: '10+', labelKey: 'about.stat_years' },
@@ -25,7 +23,7 @@ export function About() {
         className="relative h-[55vh] w-full overflow-hidden md:h-[70vh]"
       >
         <img
-          src={HERO_IMG}
+          src={windowMockup}
           alt="MasterSpace — acabados arquitectónicos"
           className="h-full w-full object-cover"
         />
