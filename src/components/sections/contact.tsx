@@ -106,6 +106,14 @@ export function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="mb-2">
+                  <h3 className="font-display mb-2 text-xl text-foreground md:text-2xl">
+                    {t('contact.form_heading')}
+                  </h3>
+                  <p className="font-body text-sm text-muted-foreground">
+                    {t('contact.form_subheading')}
+                  </p>
+                </div>
                 {/* Field — borderless bottom-line style */}
                 {[
                   { label: t('contact.name'), type: 'text', required: true },

@@ -152,6 +152,8 @@
     "service": "Service type",
     "select_service": "Select a service",
     "message": "Message",
+    "form_heading": "Tell us about your project",
+    "form_subheading": "Fill out the form and we'll get back to you within 24 hours.",
     "send": "Send message",
     "success": "Message sent! We'll be in touch soon.",
     "phone_label": "Phone",

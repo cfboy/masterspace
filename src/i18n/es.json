@@ -152,6 +152,8 @@
     "service": "Tipo de servicio",
     "select_service": "Selecciona un servicio",
     "message": "Mensaje",
+    "form_heading": "Cuéntanos sobre tu proyecto",
+    "form_subheading": "Completa el formulario y te contactaremos en menos de 24 horas.",
     "send": "Enviar mensaje",
     "success": "¡Mensaje enviado! Nos pondremos en contacto pronto.",
     "phone_label": "Teléfono",
