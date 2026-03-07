@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Pause, Play } from 'lucide-react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
 import { cn } from '@/lib/utils';
 
@@ -46,6 +48,8 @@ export function Portfolio() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [tappedKey, setTappedKey] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: 'start', dragFree: true },
@@ -146,7 +150,10 @@ export function Portfolio() {
                   onClick={() => setTappedKey(tappedKey === project.key ? null : project.key)}
                 >
                   {/* Image */}
-                  <div className="aspect-4/3 overflow-hidden">
+                  <div
+                    className="aspect-4/3 overflow-hidden cursor-zoom-in"
+                    onClick={(e) => { e.stopPropagation(); setLightboxIndex(i); setLightboxOpen(true); }}
+                  >
                     <img
                       src={project.img}
                       alt={t(`portfolio.projects.${project.key}.title`)}
@@ -191,6 +198,13 @@ export function Portfolio() {
           ))}
         </div>
       </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={filtered.map((p) => ({ src: p.img }))}
+        index={lightboxIndex}
+      />
     </section>
   );
 }

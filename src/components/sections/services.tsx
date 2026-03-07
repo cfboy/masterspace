@@ -1,9 +1,18 @@
-import { useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Building2, Home, Landmark, Layers, PaintRoller, Plus, Sofa } from 'lucide-react';
+import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoller, Plus, Sofa } from 'lucide-react';
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 
+import fresqueria02 from '@/assets/projects/la-fresqueria-02.jpeg';
+import fresqueria03 from '@/assets/projects/la-fresqueria-03.jpeg';
+import fresqueria04 from '@/assets/projects/la-fresqueria-04.jpeg';
+import fresqueria06 from '@/assets/projects/la-fresqueria-06.jpeg';
+import fresqueria07 from '@/assets/projects/la-fresqueria-07.jpeg';
+import vibra from '@/assets/projects/vibra-project.jpeg';
 import { cn } from '@/lib/utils';
 
 const serviceIcons = {
@@ -14,6 +23,116 @@ const serviceIcons = {
   public:      Landmark,
   interior:    Sofa,
 } as const;
+
+const serviceImages: Record<string, string[]> = {
+  residential: [
+    fresqueria02,
+    'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80',
+    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+  ],
+  commercial: [
+    fresqueria06,
+    fresqueria03,
+    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+  ],
+  finishes: [
+    vibra,
+    'https://images.unsplash.com/photo-1604709177225-055f99402ea3?w=600&q=80',
+    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+  ],
+  coatings: [
+    'https://images.unsplash.com/photo-1604709177225-055f99402ea3?w=600&q=80',
+    'https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80',
+    'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&q=80',
+  ],
+  public: [
+    fresqueria04,
+    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80',
+    'https://images.unsplash.com/photo-1462826303086-329426d1aef5?w=600&q=80',
+  ],
+  interior: [
+    fresqueria07,
+    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80',
+    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=600&q=80',
+  ],
+};
+
+function ServiceCarousel({ images, alt }: { images: string[]; alt: string }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on('select', onSelect);
+    return () => { emblaApi.off('select', onSelect); };
+  }, [emblaApi, onSelect]);
+
+  const slides = images.map((src) => ({ src }));
+
+  return (
+    <div className="w-full shrink-0 md:w-72">
+      <div className="relative">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {images.map((src, i) => (
+              <div key={i} className="min-w-0 flex-[0_0_100%]">
+                <img
+                  src={src}
+                  alt={`${alt} ${i + 1}`}
+                  className="h-48 w-full cursor-zoom-in object-cover md:h-44"
+                  onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Prev / Next */}
+        <button
+          onClick={() => emblaApi?.scrollPrev()}
+          className="absolute top-1/2 left-2 -translate-y-1/2 bg-background/70 p-1 text-foreground backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+          aria-label="Previous"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <button
+          onClick={() => emblaApi?.scrollNext()}
+          className="absolute top-1/2 right-2 -translate-y-1/2 bg-background/70 p-1 text-foreground backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+          aria-label="Next"
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
+      {/* Dot indicators — same style as portfolio */}
+      <div className="mt-3 flex items-center justify-center gap-2">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => emblaApi?.scrollTo(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            className={cn(
+              'h-px transition-all duration-300',
+              i === selectedIndex ? 'w-8 bg-primary' : 'w-4 bg-border hover:bg-muted-foreground'
+            )}
+          />
+        ))}
+      </div>
+
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        index={lightboxIndex}
+      />
+    </div>
+  );
+}
 
 const serviceKeys = [
   'residential',
@@ -128,9 +247,15 @@ export function Services() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <p className="font-body pb-8 pl-14 text-base leading-relaxed text-muted-foreground md:pl-30 md:max-w-2xl">
-                        {t(`services.items.${key}.description`)}
-                      </p>
+                      <div className="flex flex-col gap-6 pb-10 md:flex-row md:items-start md:gap-12 md:pl-30">
+                        <p className="font-body text-base leading-relaxed text-muted-foreground md:max-w-2xl">
+                          {t(`services.items.${key}.description`)}
+                        </p>
+                        <ServiceCarousel
+                          images={serviceImages[key]}
+                          alt={t(`services.items.${key}.title`)}
+                        />
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
