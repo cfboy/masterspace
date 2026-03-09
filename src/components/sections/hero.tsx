@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
-import heroBgDark from '@/assets/top-view-dark-background-texture.jpg';
-import heroBgLight from '@/assets/old-grey-wall-grunge-concrete-background-with-natural-cement-texture.jpg';
+import heroBgDark from '@/assets/dark-hero.jpg';
+import heroBgLight from '@/assets/concrete-hero.jpg';
 import watermarkUrl from '@/assets/watermark/white-watermark@2x.png';
 
 const fadeUp = {
