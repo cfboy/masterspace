@@ -1,8 +1,11 @@
+import { useEffect, useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
-import heroBg from '@/assets/top-view-dark-background-texture.jpg';
+import heroBgDark from '@/assets/top-view-dark-background-texture.jpg';
+import heroBgLight from '@/assets/old-grey-wall-grunge-concrete-background-with-natural-cement-texture.jpg';
 import watermarkUrl from '@/assets/watermark/white-watermark@2x.png';
 
 const fadeUp = {
@@ -17,6 +20,18 @@ const stagger = {
 
 export function Hero() {
   const { t } = useTranslation();
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const update = () => setIsLight(root.classList.contains('light'));
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(root, { attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
+
+  const heroBg = isLight ? heroBgLight : heroBgDark;
 
   return (
     <section

@@ -110,13 +110,13 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="border-border bg-ms-black relative flex flex-col overflow-hidden border"
+            className="border-border bg-card relative flex flex-col overflow-hidden border"
           >
             {/* Gold top line */}
             <div className="bg-ms-gold absolute top-0 right-0 left-0 z-10 h-px" />
 
             {/* Cutout photo fills the card, anchored to bottom */}
-            <div className="flex min-h-72 flex-1 items-end justify-center pt-10">
+            <div className="flex min-h-72 flex-1 items-end justify-center pt-10 bg-ms-graphite/30">
               <img
                 src={founderPhoto}
                 alt="Benjamin Negrón"
@@ -127,7 +127,7 @@ export function About() {
             {/* Name bar */}
             <div className="border-border flex items-center justify-between border-t px-8 py-6">
               <div>
-                <p className="font-display text-ms-white text-xl">Benjamin Negrón</p>
+                <p className="font-display text-foreground text-xl">Benjamin Negrón</p>
                 <p className="text-ms-gold mt-1 font-sans text-xs tracking-[0.2em] uppercase">
                   {t('about.founder_role')}
                 </p>
