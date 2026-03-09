@@ -7,7 +7,7 @@ export function LanguageToggle() {
   const isES = i18n.language === 'es';
 
   return (
-    <div className="flex items-center overflow-hidden rounded border border-border font-sans text-sm">
+    <div className="flex items-center overflow-hidden border border-border font-sans text-sm">
       <button
         onClick={() => i18n.changeLanguage('es')}
         className={cn(

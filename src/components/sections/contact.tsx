@@ -163,7 +163,7 @@ export function Contact() {
 
                 <button
                   type="submit"
-                  className="font-body bg-primary px-8 py-3.5 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-85"
+                  className="font-body bg-primary w-full px-8 py-3.5 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-85 md:w-auto"
                 >
                   {t('contact.send')}
                 </button>

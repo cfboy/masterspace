@@ -12,24 +12,24 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-16 py-16 md:grid-cols-[2fr_1fr_1fr] md:gap-12 md:py-20">
           {/* Brand */}
-          <div>
-            <Logo width={180} className="mb-4 text-primary" />
-            <p className="font-body max-w-xs text-base leading-relaxed text-ms-ash">
+          <div className="flex flex-col items-center text-center md:items-start md:text-left">
+            <Logo width={180} className="text-primary mb-4" />
+            <p className="font-body text-ms-ash max-w-xs text-base leading-relaxed">
               {t('hero.tagline')}
             </p>
           </div>
 
           {/* Nav */}
-          <div>
-            <p className="mb-6 font-sans text-xs tracking-[0.2em] text-ms-slate uppercase">
+          <div className="flex flex-col items-center md:items-start">
+            <p className="text-ms-slate mb-6 font-sans text-xs tracking-[0.2em] uppercase">
               {t('footer.links')}
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col items-center gap-3 md:items-start">
               {NAV_LINKS.slice(1).map((link) => (
                 <a
                   key={link.key}
                   href={link.href}
-                  className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
+                  className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
                 >
                   {t(link.key)}
                 </a>
@@ -38,20 +38,20 @@ export function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
-            <p className="mb-6 font-sans text-xs tracking-[0.2em] text-ms-slate uppercase">
+          <div className="flex flex-col items-center md:items-start">
+            <p className="text-ms-slate mb-6 font-sans text-xs tracking-[0.2em] uppercase">
               {t('contact.title')}
             </p>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col items-center gap-3 md:items-start">
               <a
                 href={CONTACT_INFO.phoneHref}
-                className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
+                className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
               >
                 {CONTACT_INFO.phone}
               </a>
               <a
                 href={CONTACT_INFO.emailHref}
-                className="font-body text-base text-ms-ash transition-colors hover:text-ms-gold"
+                className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
               >
                 {CONTACT_INFO.email}
               </a>
@@ -60,7 +60,7 @@ export function Footer() {
                   href={SOCIAL_LINKS.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs tracking-wide text-ms-slate transition-colors hover:text-ms-gold uppercase"
+                  className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
                 >
                   Instagram
                 </a>
@@ -68,7 +68,7 @@ export function Footer() {
                   href={SOCIAL_LINKS.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs tracking-wide text-ms-slate transition-colors hover:text-ms-gold uppercase"
+                  className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
                 >
                   Facebook
                 </a>
@@ -78,9 +78,10 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-start justify-between gap-2 border-t border-ms-graphite py-6 sm:flex-row sm:items-center">
-          <p className="font-sans text-xs text-ms-slate">{t('footer.copyright')}</p>
-          <p className="font-sans text-xs text-ms-slate">{t('footer.crafted')}</p>
+        <div className="border-ms-graphite flex flex-col items-center justify-between gap-2 border-t py-6 sm:flex-row sm:items-center">
+          <p className="text-ms-slate font-sans text-xs">
+            {t('footer.copyright', { year: new Date().getFullYear() })}
+          </p>
         </div>
       </div>
     </footer>

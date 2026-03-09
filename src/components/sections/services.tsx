@@ -7,12 +7,12 @@ import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoll
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
-import fresqueria02 from '@/assets/projects/la-fresqueria-02.jpeg';
-import fresqueria03 from '@/assets/projects/la-fresqueria-03.jpeg';
-import fresqueria04 from '@/assets/projects/la-fresqueria-04.jpeg';
-import fresqueria06 from '@/assets/projects/la-fresqueria-06.jpeg';
-import fresqueria07 from '@/assets/projects/la-fresqueria-07.jpeg';
-import vibra from '@/assets/projects/vibra-project.jpeg';
+import fresqueria02 from '@/assets/projects/la-fresqueria/la-fresqueria-02.jpeg';
+import fresqueria03 from '@/assets/projects/la-fresqueria/la-fresqueria-03.jpeg';
+import fresqueria04 from '@/assets/projects/la-fresqueria/la-fresqueria-04.jpeg';
+import fresqueria06 from '@/assets/projects/la-fresqueria/la-fresqueria-06.jpeg';
+import fresqueria07 from '@/assets/projects/la-fresqueria/la-fresqueria-07.jpeg';
+import vibra from '@/assets/projects/vibra/vibra-project.jpeg';
 import { cn } from '@/lib/utils';
 
 const serviceIcons = {

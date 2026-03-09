@@ -58,6 +58,7 @@
       "technique": "Advanced Technique",
       "quality": "Quality Control"
     },
+    "founder_role": "Founder & Director",
     "image_placeholder": "Project photo",
     "stat_years": "Years of experience",
     "stat_projects": "Projects completed",
@@ -75,29 +76,20 @@
       "coatings": "Coatings"
     },
     "projects": {
-      "project1": {
-        "title": "La Fresquería — Mayagüez"
+      "laFresqueria": {
+        "title": "La Fresquería",
+        "location": "Mayagüez, PR",
+        "photoCount": "{{count}} photos"
       },
-      "project2": {
-        "title": "La Fresquería — Finishes"
+      "vibra": {
+        "title": "Vibra The Rooftop",
+        "location": "Mayagüez, PR",
+        "photoCount": "{{count}} photo"
       },
-      "project3": {
-        "title": "La Fresquería — Coating"
-      },
-      "project4": {
-        "title": "La Fresquería — Interior Detail"
-      },
-      "project5": {
-        "title": "La Fresquería — Facade"
-      },
-      "project6": {
-        "title": "La Fresquería — Commercial Space"
-      },
-      "project7": {
-        "title": "La Fresquería — Final Touches"
-      },
-      "project8": {
-        "title": "Vibra The Rooftop — Mayagüez"
+      "tresMonos": {
+        "title": "Tres Monos",
+        "location": "Puerto Rico",
+        "photoCount": "{{count}} photos"
       }
     }
   },
@@ -164,7 +156,7 @@
   "footer": {
     "tagline": "Modern Design",
     "links": "Links",
-    "copyright": "© 2025 MasterSpace LLC. All rights reserved.",
+    "copyright": "© {{year}} MasterSpace LLC. All rights reserved.",
     "crafted": "Crafted with precision"
   }
 }

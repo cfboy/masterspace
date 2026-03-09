@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
+
 import { motion } from 'framer-motion';
 
 import windowMockup from '@/assets/mockups/Window.jpg';
+import founderPhoto from '@/assets/owner.png';
 
 const stats = [
   { value: '10+', labelKey: 'about.stat_years' },
@@ -27,14 +29,14 @@ export function About() {
           alt="MasterSpace — acabados arquitectónicos"
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-card/10 via-transparent to-card" />
+        <div className="from-card/10 to-card absolute inset-0 bg-gradient-to-b via-transparent" />
 
         {/* Stat strip sitting on image bottom */}
-        <div className="absolute right-0 bottom-0 left-0 flex divide-x divide-border bg-ms-black/75 backdrop-blur-sm">
+        <div className="divide-border bg-ms-black/75 absolute right-0 bottom-0 left-0 flex divide-x backdrop-blur-sm">
           {stats.map(({ value, labelKey }) => (
-            <div key={labelKey} className="flex-1 px-6 py-6 text-center md:py-8">
-              <p className="font-display text-3xl text-ms-gold md:text-4xl">{value}</p>
-              <p className="mt-1 font-sans text-xs tracking-[0.15em] text-ms-ash uppercase">
+            <div key={labelKey} className="flex-1 px-3 py-5 text-center md:px-6 md:py-8">
+              <p className="font-display text-ms-gold text-2xl md:text-4xl">{value}</p>
+              <p className="text-ms-ash mt-1 font-sans text-[10px] leading-tight tracking-[0.1em] uppercase md:text-xs md:tracking-[0.15em]">
                 {t(labelKey as string)}
               </p>
             </div>
@@ -42,60 +44,96 @@ export function About() {
         </div>
       </motion.div>
 
-      {/* Text content */}
+      {/* About content */}
       <div className="mx-auto max-w-7xl px-6 py-20 md:px-12 md:py-28">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_2fr] lg:gap-24">
-          {/* Left — label + mission/vision */}
+        <div className="grid grid-cols-1 gap-0 lg:grid-cols-[1fr_340px]">
+          {/* Left — text */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col justify-center pr-0 pb-16 lg:pr-16 lg:pb-0"
           >
-            <span className="mb-10 block font-sans text-xs tracking-[0.25em] text-primary uppercase">
+            <span className="text-primary mb-6 block font-sans text-xs tracking-[0.25em] uppercase">
               {t('nav.about')}
             </span>
-            <div className="space-y-8">
-              <div>
-                <p className="mb-2 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
-                  {t('about.mission_title')}
-                </p>
-                <p className="font-body text-base leading-relaxed text-card-foreground">
-                  {t('about.mission')}
-                </p>
-              </div>
-              <div className="h-px bg-border" />
-              <div>
-                <p className="mb-2 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
-                  {t('about.vision_title')}
-                </p>
-                <p className="font-body text-base leading-relaxed text-card-foreground">
-                  {t('about.vision')}
-                </p>
-              </div>
-            </div>
-          </motion.div>
 
-          {/* Right — large statement pull-quote */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="font-display text-2xl leading-snug text-foreground md:text-3xl lg:text-4xl">
+            <h2 className="font-display text-foreground text-3xl leading-snug md:text-4xl lg:text-5xl">
+              {t('about.title')}
+            </h2>
+
+            <p className="font-body text-muted-foreground mt-6 text-base leading-relaxed">
               {t('about.description')}
             </p>
 
-            <div className="mt-12 flex flex-wrap gap-2">
+            <div className="mt-10 space-y-6">
+              <div className="flex gap-4">
+                <div className="bg-ms-gold mt-1 h-4 w-px shrink-0" />
+                <div>
+                  <p className="text-ms-gold mb-1 font-sans text-xs tracking-[0.15em] uppercase">
+                    {t('about.mission_title')}
+                  </p>
+                  <p className="font-body text-card-foreground text-sm leading-relaxed">
+                    {t('about.mission')}
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div className="bg-ms-gold mt-1 h-4 w-px shrink-0" />
+                <div>
+                  <p className="text-ms-gold mb-1 font-sans text-xs tracking-[0.15em] uppercase">
+                    {t('about.vision_title')}
+                  </p>
+                  <p className="font-body text-card-foreground text-sm leading-relaxed">
+                    {t('about.vision')}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-2">
               {(['structure', 'design', 'technique', 'quality'] as const).map((key) => (
                 <span
                   key={key}
-                  className="border border-border px-4 py-1.5 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase"
+                  className="border-border text-muted-foreground border px-4 py-1.5 font-sans text-xs tracking-[0.15em] uppercase"
                 >
                   {t(`about.badges.${key}`)}
                 </span>
               ))}
+            </div>
+          </motion.div>
+
+          {/* Right — founder card, full-height */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="border-border bg-ms-black relative flex flex-col overflow-hidden border"
+          >
+            {/* Gold top line */}
+            <div className="bg-ms-gold absolute top-0 right-0 left-0 z-10 h-px" />
+
+            {/* Cutout photo fills the card, anchored to bottom */}
+            <div className="flex min-h-72 flex-1 items-end justify-center pt-10">
+              <img
+                src={founderPhoto}
+                alt="Benjamin Negrón"
+                className="h-full w-full object-contain object-bottom"
+              />
+            </div>
+
+            {/* Name bar */}
+            <div className="border-border flex items-center justify-between border-t px-8 py-6">
+              <div>
+                <p className="font-display text-ms-white text-xl">Benjamin Negrón</p>
+                <p className="text-ms-gold mt-1 font-sans text-xs tracking-[0.2em] uppercase">
+                  {t('about.founder_role')}
+                </p>
+              </div>
+              {/* Decorative number */}
+              {/* <span className="font-display text-5xl text-border select-none">01</span> */}
             </div>
           </motion.div>
         </div>
