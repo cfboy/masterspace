@@ -7,11 +7,17 @@ import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoll
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
-import fresqueria02 from '@/assets/projects/la-fresqueria/la-fresqueria-02.jpeg';
 import fresqueria03 from '@/assets/projects/la-fresqueria/la-fresqueria-03.jpeg';
 import fresqueria04 from '@/assets/projects/la-fresqueria/la-fresqueria-04.jpeg';
 import fresqueria06 from '@/assets/projects/la-fresqueria/la-fresqueria-06.jpeg';
 import fresqueria07 from '@/assets/projects/la-fresqueria/la-fresqueria-07.jpeg';
+import residential01 from '@/assets/projects/residential/residential-01.jpeg';
+import residential02 from '@/assets/projects/residential/residential-02.jpeg';
+import residential03 from '@/assets/projects/residential/residential-03.jpeg';
+import residential04 from '@/assets/projects/residential/residential-04.jpeg';
+import residential05 from '@/assets/projects/residential/residential-05.jpeg';
+import residential06 from '@/assets/projects/residential/residential-06.jpeg';
+import residential07 from '@/assets/projects/residential/residential-07.jpeg';
 import vibra from '@/assets/projects/vibra/vibra-project.jpeg';
 import { cn } from '@/lib/utils';
 
@@ -26,9 +32,13 @@ const serviceIcons = {
 
 const serviceImages: Record<string, string[]> = {
   residential: [
-    fresqueria02,
-    'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&q=80',
-    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+    residential01,
+    residential02,
+    residential03,
+    residential04,
+    residential05,
+    residential06,
+    residential07,
   ],
   commercial: [
     fresqueria06,

@@ -27,6 +27,21 @@ import imgTresMonos09 from '@/assets/projects/tres-monos/tres-monos-09.jpeg';
 // Vibra
 import imgVibra01 from '@/assets/projects/vibra/vibra-01.jpeg';
 import imgVibra02 from '@/assets/projects/vibra/vibra-project.jpeg';
+// Gloss Studio
+import imgGloss01 from '@/assets/projects/gloss-studio/gloss-studio-01.jpeg';
+import imgGloss02 from '@/assets/projects/gloss-studio/gloss-studio-02.jpeg';
+import imgGloss03 from '@/assets/projects/gloss-studio/gloss-studio-03.jpeg';
+import imgGloss04 from '@/assets/projects/gloss-studio/gloss-studio-04.jpeg';
+import imgGloss05 from '@/assets/projects/gloss-studio/gloss-studio-05.jpeg';
+import imgGloss06 from '@/assets/projects/gloss-studio/gloss-studio-06.jpeg';
+import imgGloss07 from '@/assets/projects/gloss-studio/gloss-studio-07.jpeg';
+import imgGloss08 from '@/assets/projects/gloss-studio/gloss-studio-08.jpeg';
+import imgGloss09 from '@/assets/projects/gloss-studio/gloss-studio-09.jpeg';
+import imgGloss10 from '@/assets/projects/gloss-studio/gloss-studio-10.jpeg';
+import imgGloss11 from '@/assets/projects/gloss-studio/gloss-studio-11.jpeg';
+import imgGloss12 from '@/assets/projects/gloss-studio/gloss-studio-12.jpeg';
+import imgGloss13 from '@/assets/projects/gloss-studio/gloss-studio-13.jpeg';
+import imgGloss14 from '@/assets/projects/gloss-studio/gloss-studio-14.jpeg';
 import { cn } from '@/lib/utils';
 
 interface PortfolioProject {
@@ -67,6 +82,26 @@ const portfolioProjects: PortfolioProject[] = [
       imgTresMonos07,
       imgTresMonos08,
       imgTresMonos09,
+    ],
+  },
+  {
+    key: 'glossStudio',
+    cover: imgGloss05,
+    album: [
+      imgGloss01,
+      imgGloss02,
+      imgGloss03,
+      imgGloss04,
+      imgGloss05,
+      imgGloss06,
+      imgGloss07,
+      imgGloss08,
+      imgGloss09,
+      imgGloss10,
+      imgGloss11,
+      imgGloss12,
+      imgGloss13,
+      imgGloss14,
     ],
   },
 ];

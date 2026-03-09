@@ -90,6 +90,11 @@
         "title": "Tres Monos",
         "location": "Puerto Rico",
         "photoCount": "{{count}} fotos"
+      },
+      "glossStudio": {
+        "title": "Gloss Studio",
+        "location": "Puerto Rico",
+        "photoCount": "{{count}} fotos"
       }
     }
   },
