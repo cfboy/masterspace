@@ -3,14 +3,26 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoller, Plus, Sofa } from 'lucide-react';
+import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoller, Plus } from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
 import fresqueria03 from '@/assets/projects/la-fresqueria/la-fresqueria-03.jpeg';
-import fresqueria04 from '@/assets/projects/la-fresqueria/la-fresqueria-04.jpeg';
 import fresqueria06 from '@/assets/projects/la-fresqueria/la-fresqueria-06.jpeg';
-import fresqueria07 from '@/assets/projects/la-fresqueria/la-fresqueria-07.jpeg';
+import textures01 from '@/assets/projects/textures/textures-01.jpeg';
+import textures02 from '@/assets/projects/textures/textures-02.jpeg';
+import textures03 from '@/assets/projects/textures/textures-03.jpeg';
+import textures04 from '@/assets/projects/textures/textures-04.jpeg';
+import textures05 from '@/assets/projects/textures/textures-05.jpeg';
+import textures06 from '@/assets/projects/textures/textures-06.jpeg';
+import publicSector01 from '@/assets/projects/public-sector/public-sector-01.jpeg';
+import publicSector02 from '@/assets/projects/public-sector/public-sector-02.jpeg';
+import publicSector03 from '@/assets/projects/public-sector/public-sector-03.jpeg';
+import publicSector04 from '@/assets/projects/public-sector/public-sector-04.jpeg';
+import coatings01 from '@/assets/projects/specialty-coatings/specialty-coatings-01.jpeg';
+import coatings02 from '@/assets/projects/specialty-coatings/specialty-coatings-02.jpeg';
+import coatingsVid01 from '@/assets/projects/specialty-coatings/specialty-coatings-01.mp4';
+import coatingsVid02 from '@/assets/projects/specialty-coatings/specialty-coatings-02.mp4';
 import residential01 from '@/assets/projects/residential/residential-01.jpeg';
 import residential02 from '@/assets/projects/residential/residential-02.jpeg';
 import residential03 from '@/assets/projects/residential/residential-03.jpeg';
@@ -18,7 +30,8 @@ import residential04 from '@/assets/projects/residential/residential-04.jpeg';
 import residential05 from '@/assets/projects/residential/residential-05.jpeg';
 import residential06 from '@/assets/projects/residential/residential-06.jpeg';
 import residential07 from '@/assets/projects/residential/residential-07.jpeg';
-import vibra from '@/assets/projects/vibra/vibra-project.jpeg';
+import residential08 from '@/assets/projects/residential/residential-08.jpeg';
+import residential09 from '@/assets/projects/residential/residential-09.jpeg';
 import { cn } from '@/lib/utils';
 
 const serviceIcons = {
@@ -27,47 +40,50 @@ const serviceIcons = {
   finishes:    Layers,
   coatings:    PaintRoller,
   public:      Landmark,
-  interior:    Sofa,
 } as const;
 
-const serviceImages: Record<string, string[]> = {
+type MediaItem = { type: 'image'; src: string } | { type: 'video'; src: string };
+
+const serviceMedia: Record<string, MediaItem[]> = {
   residential: [
-    residential01,
-    residential02,
-    residential03,
-    residential04,
-    residential05,
-    residential06,
-    residential07,
+    { type: 'image', src: residential01 },
+    { type: 'image', src: residential02 },
+    { type: 'image', src: residential03 },
+    { type: 'image', src: residential04 },
+    { type: 'image', src: residential05 },
+    { type: 'image', src: residential06 },
+    { type: 'image', src: residential07 },
+    { type: 'image', src: residential08 },
+    { type: 'image', src: residential09 },
   ],
   commercial: [
-    fresqueria06,
-    fresqueria03,
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80',
+    { type: 'image', src: fresqueria06 },
+    { type: 'image', src: fresqueria03 },
+    { type: 'image', src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80' },
   ],
   finishes: [
-    vibra,
-    'https://images.unsplash.com/photo-1604709177225-055f99402ea3?w=600&q=80',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    { type: 'image', src: textures01 },
+    { type: 'image', src: textures02 },
+    { type: 'image', src: textures03 },
+    { type: 'image', src: textures04 },
+    { type: 'image', src: textures05 },
+    { type: 'image', src: textures06 },
   ],
   coatings: [
-    'https://images.unsplash.com/photo-1604709177225-055f99402ea3?w=600&q=80',
-    'https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80',
-    'https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&q=80',
+    { type: 'image', src: coatings01 },
+    { type: 'image', src: coatings02 },
+    { type: 'video', src: coatingsVid01 },
+    { type: 'video', src: coatingsVid02 },
   ],
   public: [
-    fresqueria04,
-    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=600&q=80',
-    'https://images.unsplash.com/photo-1462826303086-329426d1aef5?w=600&q=80',
-  ],
-  interior: [
-    fresqueria07,
-    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=80',
-    'https://images.unsplash.com/photo-1600210492486-724fe5c67fb3?w=600&q=80',
+    { type: 'image', src: publicSector01 },
+    { type: 'image', src: publicSector02 },
+    { type: 'image', src: publicSector03 },
+    { type: 'image', src: publicSector04 },
   ],
 };
 
-function ServiceCarousel({ images, alt }: { images: string[]; alt: string }) {
+function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -84,21 +100,40 @@ function ServiceCarousel({ images, alt }: { images: string[]; alt: string }) {
     return () => { emblaApi.off('select', onSelect); };
   }, [emblaApi, onSelect]);
 
-  const slides = images.map((src) => ({ src }));
+  const imageSlides = media.filter((m) => m.type === 'image').map((m) => ({ src: m.src }));
+
+  const openLightbox = (item: MediaItem, i: number) => {
+    if (item.type === 'image') {
+      const imageIndex = media.slice(0, i + 1).filter((m) => m.type === 'image').length - 1;
+      setLightboxIndex(imageIndex);
+      setLightboxOpen(true);
+    }
+  };
 
   return (
     <div className="w-full shrink-0 md:w-72">
       <div className="relative">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {images.map((src, i) => (
+            {media.map((item, i) => (
               <div key={i} className="min-w-0 flex-[0_0_100%]">
-                <img
-                  src={src}
-                  alt={`${alt} ${i + 1}`}
-                  className="h-48 w-full cursor-zoom-in object-cover md:h-44"
-                  onClick={() => { setLightboxIndex(i); setLightboxOpen(true); }}
-                />
+                {item.type === 'video' ? (
+                  <video
+                    src={item.src}
+                    className="h-48 w-full object-cover md:h-44"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img
+                    src={item.src}
+                    alt={`${alt} ${i + 1}`}
+                    className="h-48 w-full cursor-zoom-in object-cover md:h-44"
+                    onClick={() => openLightbox(item, i)}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -119,9 +154,9 @@ function ServiceCarousel({ images, alt }: { images: string[]; alt: string }) {
           <ChevronRight size={16} />
         </button>
       </div>
-      {/* Dot indicators — same style as portfolio */}
+      {/* Dot indicators */}
       <div className="mt-3 flex items-center justify-center gap-2">
-        {images.map((_, i) => (
+        {media.map((_, i) => (
           <button
             key={i}
             onClick={() => emblaApi?.scrollTo(i)}
@@ -137,7 +172,7 @@ function ServiceCarousel({ images, alt }: { images: string[]; alt: string }) {
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
-        slides={slides}
+        slides={imageSlides}
         index={lightboxIndex}
       />
     </div>
@@ -150,7 +185,6 @@ const serviceKeys = [
   'finishes',
   'coatings',
   'public',
-  'interior',
 ] as const;
 
 export function Services() {
@@ -262,7 +296,7 @@ export function Services() {
                           {t(`services.items.${key}.description`)}
                         </p>
                         <ServiceCarousel
-                          images={serviceImages[key]}
+                          media={serviceMedia[key]}
                           alt={t(`services.items.${key}.title`)}
                         />
                       </div>
