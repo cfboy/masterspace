@@ -8,7 +8,8 @@ import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
 import fresqueria03 from '@/assets/projects/la-fresqueria/la-fresqueria-03.jpeg';
-import fresqueria06 from '@/assets/projects/la-fresqueria/la-fresqueria-06.jpeg';
+import tresMonos01 from '@/assets/projects/tres-monos/tres-monos-01.jpeg';
+import vibra01 from '@/assets/projects/vibra/vibra-01.jpeg';
 import textures01 from '@/assets/projects/textures/textures-01.jpeg';
 import textures02 from '@/assets/projects/textures/textures-02.jpeg';
 import textures03 from '@/assets/projects/textures/textures-03.jpeg';
@@ -57,9 +58,9 @@ const serviceMedia: Record<string, MediaItem[]> = {
     { type: 'image', src: residential09 },
   ],
   commercial: [
-    { type: 'image', src: fresqueria06 },
     { type: 'image', src: fresqueria03 },
-    { type: 'image', src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80' },
+    { type: 'image', src: tresMonos01 },
+    { type: 'image', src: vibra01 },
   ],
   finishes: [
     { type: 'image', src: textures01 },
