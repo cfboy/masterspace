@@ -3,88 +3,43 @@ import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { Building2, ChevronLeft, ChevronRight, Home, Landmark, Layers, PaintRoller, Plus } from 'lucide-react';
+import {
+  Building2, ChevronLeft, ChevronRight, Home, Landmark,
+  Layers, PaintRoller, Plus, type LucideIcon,
+} from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
-import fresqueria03 from '@/assets/projects/la-fresqueria/la-fresqueria-03.jpeg';
-import tresMonos01 from '@/assets/projects/tres-monos/tres-monos-01.jpeg';
-import vibra01 from '@/assets/projects/vibra/vibra-01.jpeg';
-import textures01 from '@/assets/projects/textures/textures-01.jpeg';
-import textures02 from '@/assets/projects/textures/textures-02.jpeg';
-import textures03 from '@/assets/projects/textures/textures-03.jpeg';
-import textures04 from '@/assets/projects/textures/textures-04.jpeg';
-import textures05 from '@/assets/projects/textures/textures-05.jpeg';
-import textures06 from '@/assets/projects/textures/textures-06.jpeg';
-import publicSector01 from '@/assets/projects/public-sector/public-sector-01.jpeg';
-import publicSector02 from '@/assets/projects/public-sector/public-sector-02.jpeg';
-import publicSector03 from '@/assets/projects/public-sector/public-sector-03.jpeg';
-import publicSector04 from '@/assets/projects/public-sector/public-sector-04.jpeg';
-import coatings01 from '@/assets/projects/specialty-coatings/specialty-coatings-01.jpeg';
-import coatings02 from '@/assets/projects/specialty-coatings/specialty-coatings-02.jpeg';
-import coatingsVid01 from '@/assets/projects/specialty-coatings/specialty-coatings-01.mp4';
-import coatingsVid02 from '@/assets/projects/specialty-coatings/specialty-coatings-02.mp4';
-import residential01 from '@/assets/projects/residential/residential-01.jpeg';
-import residential02 from '@/assets/projects/residential/residential-02.jpeg';
-import residential03 from '@/assets/projects/residential/residential-03.jpeg';
-import residential04 from '@/assets/projects/residential/residential-04.jpeg';
-import residential05 from '@/assets/projects/residential/residential-05.jpeg';
-import residential06 from '@/assets/projects/residential/residential-06.jpeg';
-import residential07 from '@/assets/projects/residential/residential-07.jpeg';
-import residential08 from '@/assets/projects/residential/residential-08.jpeg';
-import residential09 from '@/assets/projects/residential/residential-09.jpeg';
+import { useSanity } from '@/hooks/use-sanity';
 import { cn } from '@/lib/utils';
+import { fetchServices, localized, urlFor, type SanityMediaItem, type SanityService } from '@/lib/sanity';
 
-const serviceIcons = {
-  residential: Home,
-  commercial:  Building2,
-  finishes:    Layers,
-  coatings:    PaintRoller,
-  public:      Landmark,
-} as const;
-
-type MediaItem = { type: 'image'; src: string } | { type: 'video'; src: string };
-
-const serviceMedia: Record<string, MediaItem[]> = {
-  residential: [
-    { type: 'image', src: residential01 },
-    { type: 'image', src: residential02 },
-    { type: 'image', src: residential03 },
-    { type: 'image', src: residential04 },
-    { type: 'image', src: residential05 },
-    { type: 'image', src: residential06 },
-    { type: 'image', src: residential07 },
-    { type: 'image', src: residential08 },
-    { type: 'image', src: residential09 },
-  ],
-  commercial: [
-    { type: 'image', src: fresqueria03 },
-    { type: 'image', src: tresMonos01 },
-    { type: 'image', src: vibra01 },
-  ],
-  finishes: [
-    { type: 'image', src: textures01 },
-    { type: 'image', src: textures02 },
-    { type: 'image', src: textures03 },
-    { type: 'image', src: textures04 },
-    { type: 'image', src: textures05 },
-    { type: 'image', src: textures06 },
-  ],
-  coatings: [
-    { type: 'image', src: coatings01 },
-    { type: 'image', src: coatings02 },
-    { type: 'video', src: coatingsVid01 },
-    { type: 'video', src: coatingsVid02 },
-  ],
-  public: [
-    { type: 'image', src: publicSector01 },
-    { type: 'image', src: publicSector02 },
-    { type: 'image', src: publicSector03 },
-    { type: 'image', src: publicSector04 },
-  ],
+const iconMap: Record<string, LucideIcon> = {
+  Home, Building2, Layers, PaintRoller, Landmark,
+  LuHome: Home, LuBuilding2: Building2, LuLayers: Layers,
+  LuPaintRoller: PaintRoller, LuLandmark: Landmark,
 };
 
-function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
+function resolveIcon(icon: SanityService['icon']): LucideIcon {
+  if (!icon) return Home;
+  const name = typeof icon === 'object' ? icon.name : icon;
+  return iconMap[name] ?? Home;
+}
+
+function getMediaUrl(item: SanityMediaItem): string {
+  if (item._type === 'image') {
+    return urlFor(item).width(800).quality(80).auto('format').url();
+  }
+  return item.asset?.url ?? '';
+}
+
+function isVideo(item: SanityMediaItem): boolean {
+  if (item._type === 'file') return true;
+  if (item.asset?.mimeType?.startsWith('video/')) return true;
+  return false;
+}
+
+function ServiceCarousel({ media, alt }: { media: SanityMediaItem[]; alt: string }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -101,11 +56,13 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
     return () => { emblaApi.off('select', onSelect); };
   }, [emblaApi, onSelect]);
 
-  const imageSlides = media.filter((m) => m.type === 'image').map((m) => ({ src: m.src }));
+  const imageSlides = media
+    .filter((m) => !isVideo(m))
+    .map((m) => ({ src: urlFor(m).width(1600).quality(85).auto('format').url() }));
 
-  const openLightbox = (item: MediaItem, i: number) => {
-    if (item.type === 'image') {
-      const imageIndex = media.slice(0, i + 1).filter((m) => m.type === 'image').length - 1;
+  const openLightbox = (item: SanityMediaItem, i: number) => {
+    if (!isVideo(item)) {
+      const imageIndex = media.slice(0, i + 1).filter((m) => !isVideo(m)).length - 1;
       setLightboxIndex(imageIndex);
       setLightboxOpen(true);
     }
@@ -118,9 +75,9 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
           <div className="flex">
             {media.map((item, i) => (
               <div key={i} className="min-w-0 flex-[0_0_100%]">
-                {item.type === 'video' ? (
+                {isVideo(item) ? (
                   <video
-                    src={item.src}
+                    src={getMediaUrl(item)}
                     className="h-48 w-full object-cover md:h-44"
                     autoPlay
                     muted
@@ -129,7 +86,7 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
                   />
                 ) : (
                   <img
-                    src={item.src}
+                    src={getMediaUrl(item)}
                     alt={`${alt} ${i + 1}`}
                     className="h-48 w-full cursor-zoom-in object-cover md:h-44"
                     onClick={() => openLightbox(item, i)}
@@ -139,7 +96,6 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
             ))}
           </div>
         </div>
-        {/* Prev / Next */}
         <button
           onClick={() => emblaApi?.scrollPrev()}
           className="absolute top-1/2 left-2 -translate-y-1/2 bg-background/70 p-1 text-foreground backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -155,7 +111,6 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
           <ChevronRight size={16} />
         </button>
       </div>
-      {/* Dot indicators */}
       <div className="mt-3 flex items-center justify-center gap-2">
         {media.map((_, i) => (
           <button
@@ -180,22 +135,39 @@ function ServiceCarousel({ media, alt }: { media: MediaItem[]; alt: string }) {
   );
 }
 
-const serviceKeys = [
-  'residential',
-  'commercial',
-  'finishes',
-  'coatings',
-  'public',
-] as const;
-
 export function Services() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as 'es' | 'en';
+  const { data: services, loading } = useSanity(useCallback(() => fetchServices(), []), 'services');
   const [active, setActive] = useState<string | null>(null);
+
+  if (loading || !services) {
+    return (
+      <section id="servicios" className="px-6 py-24 md:py-36 md:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex items-start gap-8 md:mb-24">
+            <div className="pt-2">
+              <span className="font-sans text-sm tracking-[0.2em] text-primary uppercase">
+                {t('nav.services')}
+              </span>
+            </div>
+            <h2 className="font-display max-w-xl text-3xl leading-tight text-foreground md:text-5xl">
+              {t('services.title')}
+            </h2>
+          </div>
+          <div className="space-y-6">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="h-20 animate-pulse bg-secondary" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="servicios" className="px-6 py-24 md:py-36 md:px-12">
       <div className="mx-auto max-w-7xl">
-        {/* Section header */}
         <div className="mb-16 flex items-start gap-8 md:mb-24">
           <div className="pt-2">
             <span className="font-sans text-sm tracking-[0.2em] text-primary uppercase">
@@ -207,15 +179,16 @@ export function Services() {
           </h2>
         </div>
 
-        {/* Accordion list */}
         <div>
-          {serviceKeys.map((key, i) => {
-            const Icon = serviceIcons[key];
-            const isOpen = active === key;
+          {services.map((service: SanityService, i: number) => {
+            const Icon = resolveIcon(service.icon);
+            const isOpen = active === service.key;
+            const title = localized(service, 'title', lang);
+            const description = localized(service, 'description', lang);
 
             return (
               <motion.div
-                key={key}
+                key={service._id}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
@@ -225,11 +198,10 @@ export function Services() {
 
                 <button
                   className="group w-full cursor-pointer py-7 text-left md:py-9"
-                  onClick={() => setActive(isOpen ? null : key)}
+                  onClick={() => setActive(isOpen ? null : service.key)}
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-4 md:gap-10">
-                    {/* Number */}
                     <span
                       className={cn(
                         'font-sans w-10 shrink-0 text-sm tabular-nums transition-colors duration-300',
@@ -239,7 +211,6 @@ export function Services() {
                       {String(i + 1).padStart(2, '0')}
                     </span>
 
-                    {/* Icon */}
                     <span
                       className={cn(
                         'transition-colors duration-300',
@@ -249,17 +220,15 @@ export function Services() {
                       <Icon size={22} strokeWidth={1.5} />
                     </span>
 
-                    {/* Title */}
                     <h3
                       className={cn(
                         'font-display flex-1 text-2xl transition-colors duration-300 md:text-3xl',
                         isOpen ? 'text-primary' : 'text-foreground group-hover:text-primary'
                       )}
                     >
-                      {t(`services.items.${key}.title`)}
+                      {title}
                     </h3>
 
-                    {/* Plus / minus toggle */}
                     <span
                       className={cn(
                         'ml-auto shrink-0 text-muted-foreground transition-transform duration-500',
@@ -271,7 +240,6 @@ export function Services() {
                     </span>
                   </div>
 
-                  {/* Animated gold underline */}
                   <motion.div
                     animate={{ scaleX: isOpen ? 1 : 0 }}
                     initial={{ scaleX: 0 }}
@@ -281,7 +249,6 @@ export function Services() {
                   />
                 </button>
 
-                {/* Expandable description */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
@@ -292,14 +259,18 @@ export function Services() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className="flex flex-col gap-6 pb-10 md:flex-row md:items-start md:gap-12 md:pl-30">
+                      <div className={cn(
+                        'pb-10 md:pl-30',
+                        service.media?.length > 0
+                          ? 'flex flex-col gap-6 md:flex-row md:items-start md:gap-12'
+                          : ''
+                      )}>
                         <p className="font-body text-base leading-relaxed text-muted-foreground md:max-w-2xl">
-                          {t(`services.items.${key}.description`)}
+                          {description}
                         </p>
-                        <ServiceCarousel
-                          media={serviceMedia[key]}
-                          alt={t(`services.items.${key}.title`)}
-                        />
+                        {service.media?.length > 0 && (
+                          <ServiceCarousel media={service.media} alt={title} />
+                        )}
                       </div>
                     </motion.div>
                   )}

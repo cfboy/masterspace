@@ -8,9 +8,15 @@
     "build": "tsc -b && vite build",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sanity:dev": "sanity dev",
+    "sanity:deploy": "sanity deploy",
+    "sanity:migrate": "node scripts/migrate-to-sanity.mjs"
   },
   "dependencies": {
+    "@sanity/client": "^7.17.0",
+    "@sanity/icons": "^3.7.4",
+    "@sanity/image-url": "^2.0.3",
     "@tailwindcss/vite": "^4.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -23,12 +29,15 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
+    "sanity-plugin-icon-picker": "^4.0.0",
+    "styled-components": "^6.3.11",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.1",
     "yet-another-react-lightbox": "^3.29.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@sanity/vision": "^5.16.0",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
@@ -40,6 +49,7 @@
     "globals": "^16.5.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "sanity": "^5.16.0",
     "sharp": "^0.34.5",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.48.0",
