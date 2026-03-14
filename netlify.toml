@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm build"
+  command = "pnpm build && pnpm sanity deploy --no-browser"
   publish = "dist"
 
 [build.environment]
