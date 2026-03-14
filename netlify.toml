@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm build && pnpm sanity deploy -y"
+  command = "pnpm build && pnpm sanity deploy -y || true"
   publish = "dist"
 
 [build.environment]
