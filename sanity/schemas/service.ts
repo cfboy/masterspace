@@ -73,14 +73,25 @@ export const service = defineType({
       of: [
         {
           type: 'image',
-          options: { hotspot: true },
+          title: 'Imagen',
+          options: { hotspot: true, accept: 'image/*' },
         },
         {
           type: 'file',
           title: 'Video',
-          options: { accept: 'video/*' },
+          options: { accept: 'video/mp4,video/quicktime,video/webm' },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Descripción',
+              type: 'string',
+            }),
+          ],
         },
       ],
+      options: {
+        sortable: true,
+      },
     }),
   ],
   orderings: [
