@@ -2,13 +2,37 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Lightbox from 'yet-another-react-lightbox';
+import Video from 'yet-another-react-lightbox/plugins/video';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import 'yet-another-react-lightbox/styles.css';
 
 import { useSanity } from '@/hooks/use-sanity';
 import { cn } from '@/lib/utils';
-import { fetchProjects, localized, urlFor, type SanityProject } from '@/lib/sanity';
+import {
+  fetchProjects, localized, urlFor,
+  type SanityMediaItem, type SanityProject,
+} from '@/lib/sanity';
+
+function isVideo(item: SanityMediaItem): boolean {
+  if (item._type === 'file') return true;
+  if (item.asset?.mimeType?.startsWith('video/')) return true;
+  return false;
+}
+
+function buildSlides(album: SanityMediaItem[]) {
+  return album.map((item) => {
+    if (isVideo(item)) {
+      return {
+        type: 'video' as const,
+        sources: [{ src: item.asset?.url ?? '', type: 'video/mp4' }],
+      };
+    }
+    return {
+      src: urlFor(item).width(1600).quality(85).auto('format').url(),
+    };
+  });
+}
 
 export function Portfolio() {
   const { t, i18n } = useTranslation();
@@ -112,17 +136,13 @@ export function Portfolio() {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* Lightbox — supports both images and videos */}
       <Lightbox
         open={lightboxProject !== null}
         close={() => setLightboxProject(null)}
-        slides={
-          lightboxProject?.album.map((img) => ({
-            src: urlFor(img).width(1600).quality(85).auto('format').url(),
-          })) ?? []
-        }
+        slides={lightboxProject ? buildSlides(lightboxProject.album ?? []) : []}
         index={0}
-        plugins={[Thumbnails]}
+        plugins={[Thumbnails, Video]}
       />
     </section>
   );

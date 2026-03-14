@@ -65,9 +65,12 @@ export const project = defineType({
     }),
     defineField({
       name: 'album',
-      title: 'Álbum de Fotos',
+      title: 'Álbum de Fotos y Videos',
       type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
+      of: [
+        { type: 'image', title: 'Imagen', options: { hotspot: true } },
+        { type: 'file', title: 'Video' },
+      ],
       validation: (rule) => rule.required().min(1),
     }),
   ],

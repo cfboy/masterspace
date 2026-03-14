@@ -35,7 +35,7 @@ export interface SanityProject {
   location_es: string;
   location_en: string;
   cover: SanityImageSource;
-  album: SanityImageSource[];
+  album: SanityMediaItem[];
 }
 
 export interface SanityService {
@@ -94,7 +94,17 @@ const PROJECT_QUERY = `*[_type == "project"] | order(order asc) {
   _id, key, order,
   title_es, title_en,
   location_es, location_en,
-  cover, album
+  cover,
+  album[] {
+    _type,
+    _type == "image" => {
+      asset->,
+      hotspot, crop
+    },
+    _type == "file" => {
+      asset-> { _ref, url, mimeType }
+    }
+  }
 }`;
 
 const SERVICE_QUERY = `*[_type == "service"] | order(order asc) {
