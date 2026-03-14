@@ -5,6 +5,25 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Force HTTPS
+[[redirects]]
+  from = "http://masterspacellc.com/*"
+  to = "https://masterspacellc.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.masterspacellc.com/*"
+  to = "https://masterspacellc.com/:splat"
+  status = 301
+  force = true
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
 # SPA fallback — all routes serve index.html
 [[redirects]]
   from = "/*"
