@@ -16,33 +16,7 @@
   },
   "services": {
     "title": "Our Services",
-    "subtitle": "Comprehensive construction and design solutions",
-    "items": {
-      "residential": {
-        "title": "Residential Remodeling",
-        "description": "Demolition, concrete, plumbing, electrical, kitchens and bathrooms. We transform residential spaces with premium finishes."
-      },
-      "commercial": {
-        "title": "Commercial Remodeling",
-        "description": "Restaurants, rooftops, offices and government projects. Commercial solutions that elevate your brand."
-      },
-      "finishes": {
-        "title": "Architectural Finishes",
-        "description": "Microcement, Venetian plaster and specialty coatings. European finishing techniques for unique surfaces."
-      },
-      "coatings": {
-        "title": "Specialty Coatings",
-        "description": "Rock and brick walls with Inimitez certification, custom textures and European decorative systems."
-      },
-      "public": {
-        "title": "Public Projects",
-        "description": "Acoustic ceilings, government specifications and phased budgeting for large-scale projects."
-      },
-      "interior": {
-        "title": "Interior Design",
-        "description": "Modern interiors, PVC panels, acoustic ceilings and countertops. Comprehensive space design."
-      }
-    }
+    "subtitle": "Comprehensive construction and design solutions"
   },
   "about": {
     "title": "About Us",
@@ -68,77 +42,22 @@
     "title": "Portfolio",
     "subtitle": "Our projects speak for themselves",
     "view_more": "View more",
+    "photoCount": "{{count}} photos",
     "filters": {
       "all": "All",
       "residential": "Residential",
       "commercial": "Commercial",
       "finishes": "Finishes",
       "coatings": "Coatings"
-    },
-    "projects": {
-      "laFresqueria": {
-        "title": "La Fresquería",
-        "location": "Mayagüez, PR",
-        "photoCount": "{{count}} photos"
-      },
-      "vibra": {
-        "title": "Vibra The Rooftop",
-        "location": "Mayagüez, PR",
-        "photoCount": "{{count}} photo"
-      },
-      "tresMonos": {
-        "title": "Tres Monos",
-        "location": "Puerto Rico",
-        "photoCount": "{{count}} photos"
-      },
-      "glossStudio": {
-        "title": "Gloss Studio",
-        "location": "Puerto Rico",
-        "photoCount": "{{count}} photos"
-      }
     }
   },
   "certifications": {
     "title": "Certifications",
-    "subtitle": "Backed by the best",
-    "items": {
-      "inimitez": {
-        "title": "Inimitez Academy",
-        "institution": "Spain",
-        "description": "Specialization in decorative rock and brick, European decorative systems with advanced application techniques."
-      },
-      "ambience": {
-        "title": "Ambience Architectural Coatings",
-        "institution": "Professional Coatings",
-        "description": "Professional finishes, continuous surfaces, primers and sealers. Certified in architectural coating systems."
-      },
-      "osha": {
-        "title": "OSHA 30-Hour",
-        "institution": "Construction Safety",
-        "description": "Federal safety standards, government project readiness and comprehensive regulatory compliance."
-      }
-    }
+    "subtitle": "Backed by the best"
   },
   "testimonials": {
     "title": "Testimonials",
-    "subtitle": "What our clients say",
-    "items": {
-      "t1": {
-        "quote": "MasterSpace completely transformed our home. The level of detail and quality of finishes exceeded all our expectations.",
-        "name": "María García",
-        "project": "Residential Remodel — Guaynabo"
-      },
-      "t2": {
-        "quote": "Top-notch professionals. The Venetian plaster work they did in our restaurant gave it a completely premium look.",
-        "name": "Carlos Rivera",
-        "project": "Restaurant — San Juan"
-      },
-      "t3": {
-        "quote": "Their knowledge of European finishing techniques is impressive. They delivered on time and with exceptional quality.",
-        "name": "Ana Martínez",
-        "project": "Commercial Coating — Condado"
-      }
-    }
+    "subtitle": "What our clients say"
   },
   "contact": {
     "title": "Contact Us",

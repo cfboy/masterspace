@@ -2,5 +2,10 @@ node_modules
 dist
 *.local
 
+# Environment variables (contains secrets)
+.env
+.env.local
+
 # macOS
 .DS_Store
+.sanity/

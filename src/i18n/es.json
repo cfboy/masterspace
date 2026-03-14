@@ -16,33 +16,7 @@
   },
   "services": {
     "title": "Nuestros Servicios",
-    "subtitle": "Soluciones integrales de construcción y diseño",
-    "items": {
-      "residential": {
-        "title": "Remodelación Residencial",
-        "description": "Demolición, hormigón, plomería, electricidad, cocinas y baños. Transformamos espacios residenciales con acabados de primera calidad."
-      },
-      "commercial": {
-        "title": "Remodelación Comercial",
-        "description": "Restaurantes, rooftops, oficinas y proyectos gubernamentales. Soluciones comerciales que elevan tu marca."
-      },
-      "finishes": {
-        "title": "Acabados Arquitectónicos",
-        "description": "Microcemento, estuco veneciano y recubrimientos especiales. Técnicas europeas de acabado para superficies únicas."
-      },
-      "coatings": {
-        "title": "Revestimientos Especiales",
-        "description": "Paredes de roca y ladrillo con certificación Inimitez, texturas personalizadas y sistemas decorativos europeos."
-      },
-      "public": {
-        "title": "Proyectos Públicos",
-        "description": "Cielos rasos acústicos, especificaciones gubernamentales y presupuestos por fases para proyectos de gran escala."
-      },
-      "interior": {
-        "title": "Diseño de Interiores",
-        "description": "Interiores modernos, paneles PVC, cielos rasos acústicos y countertops. Diseño integral de espacios."
-      }
-    }
+    "subtitle": "Soluciones integrales de construcción y diseño"
   },
   "about": {
     "title": "Quiénes Somos",
@@ -68,77 +42,22 @@
     "title": "Portafolio",
     "subtitle": "Nuestros proyectos hablan por sí mismos",
     "view_more": "Ver más",
+    "photoCount": "{{count}} fotos",
     "filters": {
       "all": "Todos",
       "residential": "Residencial",
       "commercial": "Comercial",
       "finishes": "Acabados",
       "coatings": "Revestimientos"
-    },
-    "projects": {
-      "laFresqueria": {
-        "title": "La Fresquería",
-        "location": "Mayagüez, PR",
-        "photoCount": "{{count}} fotos"
-      },
-      "vibra": {
-        "title": "Vibra The Rooftop",
-        "location": "Mayagüez, PR",
-        "photoCount": "{{count}} foto"
-      },
-      "tresMonos": {
-        "title": "Tres Monos",
-        "location": "Puerto Rico",
-        "photoCount": "{{count}} fotos"
-      },
-      "glossStudio": {
-        "title": "Gloss Studio",
-        "location": "Puerto Rico",
-        "photoCount": "{{count}} fotos"
-      }
     }
   },
   "certifications": {
     "title": "Certificaciones",
-    "subtitle": "Avalados por los mejores",
-    "items": {
-      "inimitez": {
-        "title": "Inimitez Academy",
-        "institution": "España",
-        "description": "Especialización en roca y ladrillo decorativo, sistemas decorativos europeos con técnicas avanzadas de aplicación."
-      },
-      "ambience": {
-        "title": "Ambience Architectural Coatings",
-        "institution": "Recubrimientos Profesionales",
-        "description": "Acabados profesionales, superficies continuas, primers y selladores. Certificación en sistemas de recubrimiento arquitectónico."
-      },
-      "osha": {
-        "title": "OSHA 30 Horas",
-        "institution": "Seguridad en Construcción",
-        "description": "Estándares federales de seguridad, preparación para proyectos gubernamentales y cumplimiento normativo integral."
-      }
-    }
+    "subtitle": "Avalados por los mejores"
   },
   "testimonials": {
     "title": "Testimonios",
-    "subtitle": "Lo que dicen nuestros clientes",
-    "items": {
-      "t1": {
-        "quote": "MasterSpace transformó completamente nuestra casa. El nivel de detalle y la calidad de los acabados superó todas nuestras expectativas.",
-        "name": "María García",
-        "project": "Remodelación Residencial — Guaynabo"
-      },
-      "t2": {
-        "quote": "Profesionales de primera. El trabajo de estuco veneciano que realizaron en nuestro restaurante le dio un look completamente premium.",
-        "name": "Carlos Rivera",
-        "project": "Restaurante — San Juan"
-      },
-      "t3": {
-        "quote": "Su conocimiento en técnicas europeas de acabados es impresionante. Entregaron a tiempo y con una calidad excepcional.",
-        "name": "Ana Martínez",
-        "project": "Revestimiento Comercial — Condado"
-      }
-    }
+    "subtitle": "Lo que dicen nuestros clientes"
   },
   "contact": {
     "title": "Contáctanos",
