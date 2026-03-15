@@ -1,12 +1,26 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import App from './App';
-import './i18n';
-import './index.css';
+const root = document.getElementById('root')!;
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+if (window.location.pathname.startsWith('/studio')) {
+  // Lazy-load Studio — keeps it out of the main site bundle
+  import('./studio/StudioPage').then(({ default: StudioPage }) => {
+    createRoot(root).render(
+      <StrictMode>
+        <StudioPage />
+      </StrictMode>
+    );
+  });
+} else {
+  // Main website — load Tailwind CSS and i18n only for the public site
+  import('./index.css');
+  import('./i18n');
+  import('./App').then(({ default: App }) => {
+    createRoot(root).render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+  });
+}

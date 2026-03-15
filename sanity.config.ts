@@ -9,6 +9,7 @@ export default defineConfig({
   title: 'MasterSpace CMS',
   projectId: 'ls1g2tok',
   dataset: 'production',
+  basePath: '/studio',
   plugins: [structureTool(), visionTool(), iconPicker()],
   schema: {
     types: schemaTypes,
