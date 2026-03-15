@@ -71,6 +71,13 @@ export const businessInfo = defineType({
       fieldset: 'founder',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'founderImage',
+      title: 'Founder Photo',
+      type: 'image',
+      fieldset: 'founder',
+      options: { hotspot: true },
+    }),
 
     // --- Stats ---
     defineField({

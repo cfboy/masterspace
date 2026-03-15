@@ -93,6 +93,7 @@ export interface SanityBusinessInfo {
   founderName: string;
   founderRole_es: string;
   founderRole_en: string;
+  founderImage?: SanityImageSource;
   yearsExperience: number;
   projectsCompleted: number;
 }
@@ -163,7 +164,7 @@ const TESTIMONIAL_QUERY = `*[_type == "testimonial"] | order(orderRank asc) {
 const BUSINESS_INFO_QUERY = `*[_type == "businessInfo" && _id == "businessInfo"][0] {
   phone, email, location,
   instagram, facebook,
-  founderName, founderRole_es, founderRole_en,
+  founderName, founderRole_es, founderRole_en, founderImage,
   yearsExperience, projectsCompleted,
   "certificationsCount": count(*[_type == "certification"])
 }`;

@@ -7,7 +7,7 @@ import windowMockup from '@/assets/mockups/Window.jpg';
 import founderPhoto from '@/assets/owner.png';
 import { useBusinessInfo } from '@/hooks/use-business-info';
 import { useSanity } from '@/hooks/use-sanity';
-import { fetchCertifications } from '@/lib/sanity';
+import { fetchCertifications, urlFor } from '@/lib/sanity';
 
 export function About() {
   const { t, i18n } = useTranslation();
@@ -130,7 +130,7 @@ export function About() {
             {/* Cutout photo fills the card, anchored to bottom */}
             <div className="bg-ms-graphite/30 flex min-h-72 flex-1 items-end justify-center pt-10">
               <img
-                src={founderPhoto}
+                src={biz.founderImage ? urlFor(biz.founderImage).width(680).url() : founderPhoto}
                 alt={biz.founderName}
                 className="h-full w-full object-contain object-bottom"
               />
