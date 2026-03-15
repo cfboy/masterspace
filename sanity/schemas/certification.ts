@@ -1,3 +1,4 @@
+import { orderRankField } from '@sanity/orderable-document-list';
 import { defineField, defineType } from 'sanity';
 
 export const certification = defineType({
@@ -9,17 +10,12 @@ export const certification = defineType({
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
+    orderRankField({ type: 'certification' }),
     defineField({
       name: 'key',
       title: 'Clave',
       type: 'string',
       description: 'Identificador único (ej: "inimitez", "osha")',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'order',
-      title: 'Orden',
-      type: 'number',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -91,13 +87,6 @@ export const certification = defineType({
       fieldset: 'en',
       validation: (rule) => rule.required(),
     }),
-  ],
-  orderings: [
-    {
-      title: 'Orden',
-      name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
-    },
   ],
   preview: {
     select: { title: 'title_es', subtitle: 'institution_es' },

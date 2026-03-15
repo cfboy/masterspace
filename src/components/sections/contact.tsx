@@ -1,4 +1,3 @@
-import type { FormEvent } from 'react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -14,21 +13,24 @@ export function Contact() {
   const { data: services } = useSanity(useCallback(() => fetchServices(), []), 'services');
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form);
 
     try {
-      await fetch('/', {
+      const res = await fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData as unknown as Record<string, string>).toString(),
       });
-      setSubmitted(true);
-    } catch {
-      // Fallback: still show success to user, form data is captured by Netlify
-      setSubmitted(true);
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        console.error('Form submission failed:', res.status);
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
     }
   };
 

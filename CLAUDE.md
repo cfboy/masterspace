@@ -12,11 +12,12 @@ MasterSpace LLC company website — a dark luxurious single-page site for a Puer
 - Framer Motion for animations
 - shadcn/ui (new-york style) for components
 - react-i18next for bilingual support (ES/EN)
+- Sanity CMS (embedded Studio at `/studio`)
 - pnpm as package manager
 
 ## Commands
 
-- `pnpm dev` — Start dev server
+- `pnpm dev` — Start dev server (site at `/`, Studio at `/studio`)
 - `pnpm build` — Type-check + production build
 - `pnpm lint` — ESLint
 - `pnpm preview` — Preview production build
@@ -24,6 +25,21 @@ MasterSpace LLC company website — a dark luxurious single-page site for a Puer
 ## Architecture
 
 Single-page scroll site with sections: Hero, Services, About, Portfolio, Certifications, Testimonials, Contact, Footer.
+
+Sanity Studio is embedded at `/studio` — routing is handled via pathname check in `src/main.tsx` (no router library). Dynamic imports ensure code splitting between the public site and Studio bundles.
+
+## CMS (Sanity)
+
+- **Studio route**: `/studio` (embedded in the React app)
+- **Project ID**: `ls1g2tok`
+- **Dataset**: `production`
+- **Config**: `sanity.config.ts` (basePath: `/studio`)
+- **Schemas**: `sanity/schemas/` — project, service, certification, testimonial
+- **Structure**: `sanity/desk-structure.ts` — organized sidebar with icons
+- **Theme**: `sanity/theme.ts` — `@sanity/ui` `buildTheme` with orange primary hue, supports light/dark mode
+- **Logo**: `sanity/components/StudioLogo.tsx` — custom MasterSpace logo in Studio navbar
+- **Client**: `src/lib/sanity.ts` — GROQ queries, image URL builder, localized content helpers
+- **Data hook**: `src/hooks/use-sanity.ts` — generic fetcher with caching, loading/error states
 
 ## Brand Identity
 
@@ -39,8 +55,13 @@ Single-page scroll site with sections: Hero, Services, About, Portfolio, Certifi
 ## i18n
 
 - Default language: Spanish (es)
-- Translation files: `public/locales/{es,en}/translation.json`
+- Translation files: `src/i18n/{es,en}.json`
 - Storage key: `ms-lang`
+
+## Environment Variables
+
+- `VITE_SANITY_PROJECT_ID` — Sanity project ID
+- `VITE_SANITY_DATASET` — Sanity dataset (defaults to `production`)
 
 ## Conventions
 

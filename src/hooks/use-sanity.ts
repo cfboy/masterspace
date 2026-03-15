@@ -9,42 +9,35 @@ interface UseSanityResult<T> {
 const cache = new Map<string, { data: unknown; timestamp: number }>();
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
+function getCached<T>(key: string): T | null {
+  const cached = cache.get(key);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data as T;
+  }
+  return null;
+}
+
 export function useSanity<T>(
   fetcher: () => Promise<T>,
   cacheKey: string
 ): UseSanityResult<T> {
-  const [data, setData] = useState<T | null>(() => {
-    const cached = cache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-      return cached.data as T;
-    }
-    return null;
-  });
-  const [loading, setLoading] = useState(data === null);
+  const [data, setData] = useState<T | null>(() => getCached<T>(cacheKey));
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    const cached = cache.get(cacheKey);
-    if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
-      setData(cached.data as T);
-      setLoading(false);
-      return;
-    }
+    if (getCached(cacheKey) !== null) return;
 
     let cancelled = false;
-    setLoading(true);
 
     fetcher()
       .then((result) => {
         if (cancelled) return;
         cache.set(cacheKey, { data: result, timestamp: Date.now() });
         setData(result);
-        setLoading(false);
       })
       .catch((err: unknown) => {
         if (cancelled) return;
         setError(err instanceof Error ? err : new Error(String(err)));
-        setLoading(false);
       });
 
     return () => {
@@ -52,5 +45,5 @@ export function useSanity<T>(
     };
   }, [fetcher, cacheKey]);
 
-  return { data, loading, error };
+  return { data, loading: data === null && error === null, error };
 }

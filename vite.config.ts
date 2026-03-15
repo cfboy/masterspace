@@ -16,7 +16,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          sanity: ['@sanity/client', '@sanity/image-url'],
+          'sanity-client': ['@sanity/client', '@sanity/image-url'],
+          'sanity-studio': ['sanity', '@sanity/vision'],
         },
       },
     },

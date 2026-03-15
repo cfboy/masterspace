@@ -110,7 +110,8 @@
   </head>
   <body>
     <!-- Hidden form for Netlify to detect (SPA forms need this) -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <form name="contact" netlify netlify-honeypot="bot-field" data-netlify="true" style="display:none">
+      <input name="form-name" value="contact" />
       <input name="bot-field" />
       <input name="name" />
       <input name="email" />

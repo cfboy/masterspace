@@ -1,3 +1,4 @@
+import { orderRankField } from '@sanity/orderable-document-list';
 import { defineField, defineType } from 'sanity';
 
 export const service = defineType({
@@ -9,17 +10,12 @@ export const service = defineType({
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
+    orderRankField({ type: 'service' }),
     defineField({
       name: 'key',
       title: 'Clave',
       type: 'string',
       description: 'Identificador único (ej: "residential")',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'order',
-      title: 'Orden',
-      type: 'number',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -82,13 +78,6 @@ export const service = defineType({
         },
       ],
     }),
-  ],
-  orderings: [
-    {
-      title: 'Orden',
-      name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
-    },
   ],
   preview: {
     select: { title: 'title_es', subtitle: 'key' },
