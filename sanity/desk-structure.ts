@@ -1,7 +1,7 @@
+import { CogIcon, HomeIcon, ImagesIcon, InfoOutlineIcon, StarIcon, UsersIcon } from '@sanity/icons';
 import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
-import { HomeIcon, CogIcon, StarIcon, UsersIcon, ImagesIcon, InfoOutlineIcon } from '@sanity/icons';
-import type { StructureBuilder } from 'sanity/structure';
 import type { ConfigContext } from 'sanity';
+import type { StructureBuilder } from 'sanity/structure';
 
 import StudioHome from './components/StudioHome';
 
@@ -13,19 +13,14 @@ export const structure = (S: StructureBuilder, context: ConfigContext) =>
         .title('Home')
         .id('home')
         .icon(HomeIcon)
-        .child(
-          S.component(StudioHome).id('home').title('Home')
-        ),
+        .child(S.component(StudioHome).id('home').title('Home')),
 
       S.listItem()
         .title('Business Info')
         .id('businessInfo')
         .icon(InfoOutlineIcon)
         .child(
-          S.document()
-            .schemaType('businessInfo')
-            .documentId('businessInfo')
-            .title('Business Info')
+          S.document().schemaType('businessInfo').documentId('businessInfo').title('Business Info')
         ),
 
       S.divider(),

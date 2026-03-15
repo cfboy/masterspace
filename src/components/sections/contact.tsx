@@ -5,12 +5,15 @@ import { motion } from 'framer-motion';
 
 import { useBusinessInfo } from '@/hooks/use-business-info';
 import { useSanity } from '@/hooks/use-sanity';
-import { fetchServices, localized, type SanityService } from '@/lib/sanity';
+import { type SanityService, fetchServices, localized } from '@/lib/sanity';
 
 export function Contact() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'es' | 'en';
-  const { data: services } = useSanity(useCallback(() => fetchServices(), []), 'services');
+  const { data: services } = useSanity(
+    useCallback(() => fetchServices(), []),
+    'services'
+  );
   const biz = useBusinessInfo();
   const [submitted, setSubmitted] = useState(false);
 
@@ -40,10 +43,10 @@ export function Contact() {
       <div className="mx-auto max-w-7xl">
         {/* Header */}
         <div className="mb-16 flex items-center gap-6">
-          <span className="font-sans text-xs tracking-[0.25em] text-primary uppercase">
+          <span className="text-primary font-sans text-xs tracking-[0.25em] uppercase">
             {t('nav.contact')}
           </span>
-          <div className="h-px flex-1 bg-border" />
+          <div className="bg-border h-px flex-1" />
         </div>
 
         <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:gap-32">
@@ -54,49 +57,49 @@ export function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h2 className="font-display mb-12 text-3xl leading-tight text-foreground md:text-4xl lg:text-5xl">
+            <h2 className="font-display text-foreground mb-12 text-3xl leading-tight md:text-4xl lg:text-5xl">
               {t('contact.subtitle')}
             </h2>
 
             {/* Contact info — minimal list */}
             <div className="space-y-6">
               <div>
-                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="text-muted-foreground mb-1 font-sans text-xs tracking-[0.15em] uppercase">
                   {t('contact.phone_label')}
                 </p>
                 <a
-                  href={biz.phoneHref}
-                  className="font-body text-base text-foreground transition-colors hover:text-primary"
+                  href={`tel:+1${biz.phone.replace(/\D/g, '')}`}
+                  className="font-body text-foreground hover:text-primary text-base transition-colors"
                 >
                   {biz.phone}
                 </a>
               </div>
-              <div className="h-px bg-border" />
+              <div className="bg-border h-px" />
               <div>
-                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="text-muted-foreground mb-1 font-sans text-xs tracking-[0.15em] uppercase">
                   {t('contact.email_label')}
                 </p>
                 <a
                   href={`mailto:${biz.email}`}
-                  className="font-body text-base text-foreground transition-colors hover:text-primary"
+                  className="font-body text-foreground hover:text-primary text-base transition-colors"
                 >
                   {biz.email}
                 </a>
               </div>
-              <div className="h-px bg-border" />
+              <div className="bg-border h-px" />
               <div>
-                <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                <p className="text-muted-foreground mb-1 font-sans text-xs tracking-[0.15em] uppercase">
                   {t('contact.location_label')}
                 </p>
                 <p className="font-body text-foreground">{biz.location}</p>
               </div>
-              <div className="h-px bg-border" />
+              <div className="bg-border h-px" />
               <div className="flex gap-6">
                 <a
                   href={biz.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs tracking-wide text-muted-foreground transition-colors hover:text-primary uppercase"
+                  className="text-muted-foreground hover:text-primary font-sans text-xs tracking-wide uppercase transition-colors"
                 >
                   Instagram
                 </a>
@@ -104,7 +107,7 @@ export function Contact() {
                   href={biz.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-xs tracking-wide text-muted-foreground transition-colors hover:text-primary uppercase"
+                  className="text-muted-foreground hover:text-primary font-sans text-xs tracking-wide uppercase transition-colors"
                 >
                   Facebook
                 </a>
@@ -121,7 +124,7 @@ export function Contact() {
           >
             {submitted ? (
               <div className="flex h-full items-center">
-                <p className="font-display text-2xl text-foreground">{t('contact.success')}</p>
+                <p className="font-display text-foreground text-2xl">{t('contact.success')}</p>
               </div>
             ) : (
               <form
@@ -141,10 +144,10 @@ export function Contact() {
                 </p>
 
                 <div className="mb-2">
-                  <h3 className="font-display mb-2 text-xl text-foreground md:text-2xl">
+                  <h3 className="font-display text-foreground mb-2 text-xl md:text-2xl">
                     {t('contact.form_heading')}
                   </h3>
-                  <p className="font-body text-sm text-muted-foreground">
+                  <p className="font-body text-muted-foreground text-sm">
                     {t('contact.form_subheading')}
                   </p>
                 </div>
@@ -155,28 +158,30 @@ export function Contact() {
                   { label: t('contact.phone'), name: 'phone', type: 'tel', required: false },
                 ].map(({ label, name, type, required }) => (
                   <div key={name} className="group">
-                    <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                    <label className="text-muted-foreground mb-2 block font-sans text-xs tracking-[0.15em] uppercase">
                       {label}
                     </label>
                     <input
                       name={name}
                       type={type}
                       required={required}
-                      className="w-full border-b border-border bg-transparent pb-3 font-body text-foreground outline-none transition-colors placeholder:text-muted-foreground/40 focus:border-primary"
+                      className="border-border font-body text-foreground placeholder:text-muted-foreground/40 focus:border-primary w-full border-b bg-transparent pb-3 transition-colors outline-none"
                     />
                   </div>
                 ))}
 
                 <div>
-                  <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                  <label className="text-muted-foreground mb-2 block font-sans text-xs tracking-[0.15em] uppercase">
                     {t('contact.service')}
                   </label>
                   <select
                     name="service"
                     required
-                    className="w-full border-b border-border bg-transparent pb-3 font-body text-foreground outline-none transition-colors focus:border-primary"
+                    className="border-border font-body text-foreground focus:border-primary w-full border-b bg-transparent pb-3 transition-colors outline-none"
                   >
-                    <option value="" className="bg-card text-foreground">{t('contact.select_service')}</option>
+                    <option value="" className="bg-card text-foreground">
+                      {t('contact.select_service')}
+                    </option>
                     {services?.map((s: SanityService) => (
                       <option key={s._id} value={s.key} className="bg-card text-foreground">
                         {localized(s, 'title', lang as 'es' | 'en')}
@@ -186,20 +191,20 @@ export function Contact() {
                 </div>
 
                 <div>
-                  <label className="mb-2 block font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
+                  <label className="text-muted-foreground mb-2 block font-sans text-xs tracking-[0.15em] uppercase">
                     {t('contact.message')}
                   </label>
                   <textarea
                     name="message"
                     required
                     rows={4}
-                    className="w-full resize-none border-b border-border bg-transparent pb-3 font-body text-foreground outline-none transition-colors placeholder:text-muted-foreground/40 focus:border-primary"
+                    className="border-border font-body text-foreground placeholder:text-muted-foreground/40 focus:border-primary w-full resize-none border-b bg-transparent pb-3 transition-colors outline-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="font-body bg-primary w-full px-8 py-3.5 text-sm font-bold text-primary-foreground transition-opacity hover:opacity-85 md:w-auto"
+                  className="font-body bg-primary text-primary-foreground w-full px-8 py-3.5 text-sm font-bold transition-opacity hover:opacity-85 md:w-auto"
                 >
                   {t('contact.send')}
                 </button>

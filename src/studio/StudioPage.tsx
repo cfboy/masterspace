@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { Studio } from 'sanity';
 
 import config from '../../sanity.config';

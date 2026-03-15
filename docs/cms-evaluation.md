@@ -11,6 +11,7 @@ MasterSpace is a fully static React SPA (React 19 + Vite 7 + Tailwind v4) deploy
 ## Final Recommendation: Sanity CMS (Free Tier)
 
 After evaluating all options, **Sanity CMS** is the best fit given the user's priorities:
+
 - $0 cost (free tier: 20 users, 10K docs, 10 GB storage, 10 GB bandwidth)
 - Best editorial UX of all options — polished, modern admin UI
 - Built-in image CDN with automatic optimization (eliminates the need for `sharp` build scripts)
@@ -21,6 +22,7 @@ After evaluating all options, **Sanity CMS** is the best fit given the user's pr
 ### Why Not Decap CMS?
 
 Decap is cheaper/simpler but has significant UX limitations:
+
 - Basic form-based UI (built in 2017 with React, carries technical debt)
 - Slow loading (~1.5s per page, individual API calls per content piece)
 - No live preview of content
@@ -42,6 +44,7 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 ### 1. Editorial UX Comparison
 
 **Sanity Studio:**
+
 - Polished, modern React-based admin panel (customizable)
 - Real-time collaboration — multiple editors can work simultaneously
 - Drag-and-drop, rich text editor, image hotspot/crop tools
@@ -51,6 +54,7 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 - Access at a separate URL: `masterspace.sanity.studio` (free subdomain)
 
 **Decap CMS:**
+
 - Functional but dated form-based UI
 - Three tabs: Content, Workflow, Media
 - 16 built-in widgets (string, image, list, markdown, etc.)
@@ -63,18 +67,19 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 
 ### 2. Hosting Implications
 
-| Feature | GitHub Pages (current) | Netlify (recommended) | Vercel |
-|---------|----------------------|----------------------|--------|
-| **Cost** | $0 | $0 | $0 (Hobby) |
-| **Commercial use** | Yes | Yes | **No** (violates ToS) |
-| **Bandwidth** | Unlimited (soft) | 100 GB/mo | 100 GB/mo |
-| **Build pipeline** | Manual (or GitHub Actions) | Built-in CI/CD | Built-in CI/CD |
-| **Serverless functions** | No | Yes (125K inv/mo) | Yes |
-| **CDN** | Basic | Global CDN | Global Edge |
-| **Identity/Auth** | No | Netlify Identity (free, 5 users) | No |
-| **Form handling** | No | Built-in (100 submissions/mo) | No |
+| Feature                  | GitHub Pages (current)     | Netlify (recommended)            | Vercel                |
+| ------------------------ | -------------------------- | -------------------------------- | --------------------- |
+| **Cost**                 | $0                         | $0                               | $0 (Hobby)            |
+| **Commercial use**       | Yes                        | Yes                              | **No** (violates ToS) |
+| **Bandwidth**            | Unlimited (soft)           | 100 GB/mo                        | 100 GB/mo             |
+| **Build pipeline**       | Manual (or GitHub Actions) | Built-in CI/CD                   | Built-in CI/CD        |
+| **Serverless functions** | No                         | Yes (125K inv/mo)                | Yes                   |
+| **CDN**                  | Basic                      | Global CDN                       | Global Edge           |
+| **Identity/Auth**        | No                         | Netlify Identity (free, 5 users) | No                    |
+| **Form handling**        | No                         | Built-in (100 submissions/mo)    | No                    |
 
 **Recommended: Netlify Free Tier**
+
 - Automated builds on git push (no GitHub Actions needed)
 - Netlify Identity for CMS auth if using Decap (not needed with Sanity)
 - Built-in form handling could replace the Formspree/EmailJS TODO in the contact form
@@ -84,6 +89,7 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 ### 3. Migration Effort
 
 **Phase 1: Sanity Setup (1-2 days)**
+
 - Install `@sanity/client` and `sanity` packages
 - Define content schemas: Project, Service, Testimonial, Certification
 - Configure i18n with field-level localization (ES/EN)
@@ -91,12 +97,14 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 - Migrate existing content: 4 projects, 6 services, 3 testimonials, 3 certifications
 
 **Phase 2: Image Migration (1 day)**
+
 - Upload 55+ images to Sanity's asset pipeline
 - Each image gets automatic CDN delivery with on-the-fly optimization
 - Remove `src/assets/projects/` directory (saves ~25 MB from repo)
 - No need for `sharp` build scripts — Sanity handles optimization
 
 **Phase 3: Component Refactoring (2-3 days)**
+
 - `src/components/sections/portfolio.tsx` — replace 35 static imports with Sanity query + CDN image URLs
 - `src/components/sections/services.tsx` — replace 27 static imports similarly
 - `src/components/sections/testimonials.tsx` — pull from Sanity
@@ -105,12 +113,14 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 - Update i18n: portfolio/service text comes from Sanity instead of JSON files
 
 **Phase 4: Hosting Migration (30 min)**
+
 - Connect repo to Netlify
 - Configure build command: `pnpm build`
 - Set environment variable: `SANITY_PROJECT_ID`
 - Update DNS (CNAME from GitHub Pages to Netlify)
 
 **Phase 5: Contact Form (30 min)**
+
 - Replace the TODO in `contact.tsx` with Netlify Forms (built-in, free, 100 submissions/mo)
 
 **Total estimated effort: 4-6 days of development**
@@ -119,24 +129,24 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 
 **Sanity Free Tier Limits:**
 
-| Resource | Free Limit | MasterSpace Usage (current) | At 20 projects | At 50 projects |
-|----------|-----------|---------------------------|----------------|----------------|
-| Documents | 10,000 | ~15 (4 projects + services + testimonials) | ~50 | ~120 |
-| API requests | 200,000/mo | ~5,000/mo (low traffic site) | ~10,000/mo | ~25,000/mo |
-| Assets storage | 10 GB | ~25 MB (55 images) | ~100 MB | ~250 MB |
-| Bandwidth | 10 GB | ~2-5 GB/mo estimate | ~5-8 GB/mo | ~8-15 GB/mo |
-| Users | 20 | 1-2 editors | 2-3 editors | 3-5 editors |
+| Resource       | Free Limit | MasterSpace Usage (current)                | At 20 projects | At 50 projects |
+| -------------- | ---------- | ------------------------------------------ | -------------- | -------------- |
+| Documents      | 10,000     | ~15 (4 projects + services + testimonials) | ~50            | ~120           |
+| API requests   | 200,000/mo | ~5,000/mo (low traffic site)               | ~10,000/mo     | ~25,000/mo     |
+| Assets storage | 10 GB      | ~25 MB (55 images)                         | ~100 MB        | ~250 MB        |
+| Bandwidth      | 10 GB      | ~2-5 GB/mo estimate                        | ~5-8 GB/mo     | ~8-15 GB/mo    |
+| Users          | 20         | 1-2 editors                                | 2-3 editors    | 3-5 editors    |
 
 **Verdict: Free tier is more than sufficient for the foreseeable future.** Even at 50 projects, MasterSpace uses ~1.2% of the document limit, ~12.5% of API requests, ~2.5% of storage, and well under bandwidth limits. The site would need to become extremely high-traffic (100K+ monthly visitors) before approaching free tier limits.
 
 **Netlify Free Tier:**
 
-| Resource | Free Limit | MasterSpace Usage |
-|----------|-----------|-------------------|
-| Bandwidth | 100 GB/mo | ~5-10 GB/mo |
-| Build minutes | 300/mo | ~5 min/build x ~10 builds/mo = 50 min |
-| Forms | 100 submissions/mo | Sufficient for contact form |
-| Sites | Unlimited | 1 |
+| Resource      | Free Limit         | MasterSpace Usage                     |
+| ------------- | ------------------ | ------------------------------------- |
+| Bandwidth     | 100 GB/mo          | ~5-10 GB/mo                           |
+| Build minutes | 300/mo             | ~5 min/build x ~10 builds/mo = 50 min |
+| Forms         | 100 submissions/mo | Sufficient for contact form           |
+| Sites         | Unlimited          | 1                                     |
 
 **Total projected cost: $0/month** for at least the next 2-3 years of growth.
 
@@ -147,6 +157,7 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 ## Implementation Plan
 
 ### Phase 1: Sanity CMS Setup
+
 - `npm create sanity@latest` — initialize Sanity project with schemas
 - Define schemas: `project.ts` (title, location, description, cover, album[], all with ES/EN), `service.ts`, `testimonial.ts`, `certification.ts`
 - Configure i18n: document-level internationalization with `@sanity/document-internationalization` plugin
@@ -154,11 +165,13 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 - Migrate existing content from JSON/TypeScript into Sanity
 
 ### Phase 2: Image Migration
+
 - Upload all images from `src/assets/projects/` to Sanity
 - Sanity CDN auto-generates optimized sizes (no `sharp` scripts needed)
 - Remove static image files from repo
 
 ### Phase 3: Component Refactoring
+
 - Add `@sanity/client` to the project
 - Create `src/lib/sanity.ts` — client config + query helpers
 - Refactor `portfolio.tsx`: fetch projects from Sanity, use CDN image URLs
@@ -167,30 +180,32 @@ For non-technical editors adding construction portfolio projects with photos, Sa
 - Simplify i18n JSON files (remove sections now managed by Sanity)
 
 ### Phase 4: Hosting Migration
+
 - Connect GitHub repo to Netlify
 - Configure build: `pnpm build`, publish dir: `dist`
 - Set env vars: `VITE_SANITY_PROJECT_ID`, `VITE_SANITY_DATASET`
 - Update DNS: CNAME `masterspacellc.com` → Netlify
 
 ### Phase 5: Contact Form
+
 - Replace TODO in `contact.tsx` with Netlify Forms integration
 
 ---
 
 ## Key Files to Modify
 
-| File | Change |
-|------|--------|
-| `src/components/sections/portfolio.tsx` | Replace 35 static imports with Sanity query + CDN URLs |
-| `src/components/sections/services.tsx` | Replace 27 static imports with Sanity data |
-| `src/components/sections/testimonials.tsx` | Fetch from Sanity |
-| `src/components/sections/certifications.tsx` | Fetch from Sanity |
-| `src/components/sections/contact.tsx` | Integrate Netlify Forms (replace Formspree TODO) |
-| `src/i18n/es.json`, `en.json` | Remove sections managed by Sanity |
-| `vite.config.ts` | Add Sanity env vars |
-| **New:** `src/lib/sanity.ts` | Sanity client config + GROQ queries |
-| **New:** `sanity/` directory | Sanity Studio schemas and config |
-| **New:** `netlify.toml` | Netlify build configuration |
+| File                                         | Change                                                 |
+| -------------------------------------------- | ------------------------------------------------------ |
+| `src/components/sections/portfolio.tsx`      | Replace 35 static imports with Sanity query + CDN URLs |
+| `src/components/sections/services.tsx`       | Replace 27 static imports with Sanity data             |
+| `src/components/sections/testimonials.tsx`   | Fetch from Sanity                                      |
+| `src/components/sections/certifications.tsx` | Fetch from Sanity                                      |
+| `src/components/sections/contact.tsx`        | Integrate Netlify Forms (replace Formspree TODO)       |
+| `src/i18n/es.json`, `en.json`                | Remove sections managed by Sanity                      |
+| `vite.config.ts`                             | Add Sanity env vars                                    |
+| **New:** `src/lib/sanity.ts`                 | Sanity client config + GROQ queries                    |
+| **New:** `sanity/` directory                 | Sanity Studio schemas and config                       |
+| **New:** `netlify.toml`                      | Netlify build configuration                            |
 
 ## Verification
 

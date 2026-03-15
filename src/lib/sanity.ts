@@ -86,7 +86,6 @@ export interface SanityTestimonial {
 
 export interface SanityBusinessInfo {
   phone: string;
-  phoneHref: string;
   email: string;
   location: string;
   instagram?: string;
@@ -102,7 +101,6 @@ export interface SanityBusinessInfo {
 
 export const DEFAULT_BUSINESS_INFO: SanityBusinessInfo = {
   phone: '(787) 546-7168',
-  phoneHref: 'tel:+17875467168',
   email: 'masterspacellc@gmail.com',
   location: 'Puerto Rico',
   instagram: 'https://www.instagram.com/masterspacellc/',
@@ -163,7 +161,7 @@ const TESTIMONIAL_QUERY = `*[_type == "testimonial"] | order(orderRank asc) {
 }`;
 
 const BUSINESS_INFO_QUERY = `*[_type == "businessInfo" && _id == "businessInfo"][0] {
-  phone, phoneHref, email, location,
+  phone, email, location,
   instagram, facebook,
   founderName, founderRole_es, founderRole_en,
   yearsExperience, projectsCompleted,

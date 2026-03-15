@@ -22,12 +22,12 @@ pnpm dev
 
 ## Commands
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start dev server |
-| `pnpm build` | Type-check + production build |
-| `pnpm lint` | Run ESLint |
-| `pnpm preview` | Preview production build |
+| Command        | Description                   |
+| -------------- | ----------------------------- |
+| `pnpm dev`     | Start dev server              |
+| `pnpm build`   | Type-check + production build |
+| `pnpm lint`    | Run ESLint                    |
+| `pnpm preview` | Preview production build      |
 
 ## Project Structure
 
@@ -65,10 +65,10 @@ Sanity Studio is embedded directly in the app at `/studio`. No separate process 
 
 ## Environment Variables
 
-| Variable | Description |
-| --- | --- |
-| `VITE_SANITY_PROJECT_ID` | Sanity project ID |
-| `VITE_SANITY_DATASET` | Sanity dataset (default: `production`) |
+| Variable                 | Description                            |
+| ------------------------ | -------------------------------------- |
+| `VITE_SANITY_PROJECT_ID` | Sanity project ID                      |
+| `VITE_SANITY_DATASET`    | Sanity dataset (default: `production`) |
 
 ## Deployment
 

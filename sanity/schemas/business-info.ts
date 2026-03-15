@@ -21,14 +21,6 @@ export const businessInfo = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'phoneHref',
-      title: 'Phone Link',
-      type: 'string',
-      description: 'E.g. tel:+17875467168',
-      fieldset: 'contact',
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
       name: 'email',
       title: 'Email',
       type: 'string',

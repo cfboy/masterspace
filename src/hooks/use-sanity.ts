@@ -17,10 +17,7 @@ function getCached<T>(key: string): T | null {
   return null;
 }
 
-export function useSanity<T>(
-  fetcher: () => Promise<T>,
-  cacheKey: string
-): UseSanityResult<T> {
+export function useSanity<T>(fetcher: () => Promise<T>, cacheKey: string): UseSanityResult<T> {
   const [data, setData] = useState<T | null>(() => getCached<T>(cacheKey));
   const [error, setError] = useState<Error | null>(null);
 

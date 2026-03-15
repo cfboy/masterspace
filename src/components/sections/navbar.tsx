@@ -40,7 +40,7 @@ export function Navbar() {
           'fixed top-0 right-0 left-0 z-50 border-b transition-[background-color,border-color] duration-300',
           scrolled
             ? 'border-border bg-background/90 backdrop-blur-md'
-            : 'border-transparent bg-transparent text-ms-white [--primary:var(--color-ms-gold)] [--muted-foreground:var(--color-ms-ash)] [--foreground:var(--color-ms-white)]'
+            : 'text-ms-white border-transparent bg-transparent [--foreground:var(--color-ms-white)] [--muted-foreground:var(--color-ms-ash)] [--primary:var(--color-ms-gold)]'
         )}
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:h-20 md:px-12">
@@ -57,7 +57,7 @@ export function Navbar() {
                 key={link.key}
                 href={link.href}
                 className={cn(
-                  'font-sans text-xs tracking-[0.12em] transition-colors uppercase',
+                  'font-sans text-xs tracking-[0.12em] uppercase transition-colors',
                   activeId === link.href.slice(1)
                     ? 'text-primary'
                     : 'text-muted-foreground hover:text-foreground'
@@ -74,7 +74,7 @@ export function Navbar() {
             <ThemeToggle />
             <a
               href="#contacto"
-              className="font-sans text-xs tracking-[0.12em] text-primary transition-colors hover:text-foreground uppercase"
+              className="text-primary hover:text-foreground font-sans text-xs tracking-[0.12em] uppercase transition-colors"
             >
               {t('nav.contact')}
             </a>
@@ -101,7 +101,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 flex flex-col bg-background px-8 pt-24 pb-12"
+            className="bg-background fixed inset-0 z-40 flex flex-col px-8 pt-24 pb-12"
           >
             <nav className="flex flex-col gap-0">
               {NAV_LINKS.map((link, i) => (
@@ -113,7 +113,7 @@ export function Navbar() {
                   transition={{ delay: i * 0.06, ease: [0.16, 1, 0.3, 1], duration: 0.4 }}
                   onClick={() => setMobileOpen(false)}
                   className={cn(
-                    'font-display border-b border-border py-5 text-2xl transition-colors',
+                    'font-display border-border border-b py-5 text-2xl transition-colors',
                     activeId === link.href.slice(1) ? 'text-primary' : 'text-foreground'
                   )}
                 >

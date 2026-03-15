@@ -3,17 +3,20 @@ import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
-import { useBusinessInfo } from '@/hooks/use-business-info';
-import { useSanity } from '@/hooks/use-sanity';
 import windowMockup from '@/assets/mockups/Window.jpg';
 import founderPhoto from '@/assets/owner.png';
+import { useBusinessInfo } from '@/hooks/use-business-info';
+import { useSanity } from '@/hooks/use-sanity';
 import { fetchCertifications } from '@/lib/sanity';
 
 export function About() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'es' | 'en';
   const biz = useBusinessInfo();
-  const { data: certs } = useSanity(useCallback(() => fetchCertifications(), []), 'certifications');
+  const { data: certs } = useSanity(
+    useCallback(() => fetchCertifications(), []),
+    'certifications'
+  );
 
   const stats = [
     { value: `${biz.yearsExperience}+`, labelKey: 'about.stat_years' },
@@ -125,7 +128,7 @@ export function About() {
             <div className="bg-ms-gold absolute top-0 right-0 left-0 z-10 h-px" />
 
             {/* Cutout photo fills the card, anchored to bottom */}
-            <div className="flex min-h-72 flex-1 items-end justify-center pt-10 bg-ms-graphite/30">
+            <div className="bg-ms-graphite/30 flex min-h-72 flex-1 items-end justify-center pt-10">
               <img
                 src={founderPhoto}
                 alt={biz.founderName}

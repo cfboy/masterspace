@@ -13,7 +13,6 @@
  * Usage:
  *   node scripts/migrate-to-sanity.mjs
  */
-
 import { createClient } from '@sanity/client';
 import crypto from 'node:crypto';
 import fs from 'node:fs';
@@ -68,12 +67,18 @@ const projects = [
   {
     key: 'laFresqueria',
     order: 1,
-    title_es: 'La Fresquería', title_en: 'La Fresquería',
-    location_es: 'Mayagüez, PR', location_en: 'Mayagüez, PR',
+    title_es: 'La Fresquería',
+    title_en: 'La Fresquería',
+    location_es: 'Mayagüez, PR',
+    location_en: 'Mayagüez, PR',
     folder: 'la-fresqueria',
     images: [
-      'la-fresqueria-01.jpeg', 'la-fresqueria-02.jpeg', 'la-fresqueria-03.jpeg',
-      'la-fresqueria-04.jpeg', 'la-fresqueria-05.jpeg', 'la-fresqueria-06.jpeg',
+      'la-fresqueria-01.jpeg',
+      'la-fresqueria-02.jpeg',
+      'la-fresqueria-03.jpeg',
+      'la-fresqueria-04.jpeg',
+      'la-fresqueria-05.jpeg',
+      'la-fresqueria-06.jpeg',
       'la-fresqueria-07.jpeg',
     ],
     coverIndex: 0,
@@ -81,8 +86,10 @@ const projects = [
   {
     key: 'vibra',
     order: 2,
-    title_es: 'Vibra The Rooftop', title_en: 'Vibra The Rooftop',
-    location_es: 'Mayagüez, PR', location_en: 'Mayagüez, PR',
+    title_es: 'Vibra The Rooftop',
+    title_en: 'Vibra The Rooftop',
+    location_es: 'Mayagüez, PR',
+    location_en: 'Mayagüez, PR',
     folder: 'vibra',
     images: ['vibra-01.jpeg', 'vibra-project.jpeg'],
     coverIndex: 0,
@@ -90,28 +97,47 @@ const projects = [
   {
     key: 'tresMonos',
     order: 3,
-    title_es: 'Tres Monos', title_en: 'Tres Monos',
-    location_es: 'Puerto Rico', location_en: 'Puerto Rico',
+    title_es: 'Tres Monos',
+    title_en: 'Tres Monos',
+    location_es: 'Puerto Rico',
+    location_en: 'Puerto Rico',
     folder: 'tres-monos',
     images: [
-      'tres-monos-01.jpeg', 'tres-monos-02.jpeg', 'tres-monos-03.jpeg',
-      'tres-monos-04.jpeg', 'tres-monos-05.jpeg', 'tres-monos-06.jpeg',
-      'tres-monos-07.jpeg', 'tres-monos-08.jpeg', 'tres-monos-09.jpeg',
+      'tres-monos-01.jpeg',
+      'tres-monos-02.jpeg',
+      'tres-monos-03.jpeg',
+      'tres-monos-04.jpeg',
+      'tres-monos-05.jpeg',
+      'tres-monos-06.jpeg',
+      'tres-monos-07.jpeg',
+      'tres-monos-08.jpeg',
+      'tres-monos-09.jpeg',
     ],
     coverIndex: 0,
   },
   {
     key: 'glossStudio',
     order: 4,
-    title_es: 'Gloss Studio', title_en: 'Gloss Studio',
-    location_es: 'Puerto Rico', location_en: 'Puerto Rico',
+    title_es: 'Gloss Studio',
+    title_en: 'Gloss Studio',
+    location_es: 'Puerto Rico',
+    location_en: 'Puerto Rico',
     folder: 'gloss-studio',
     images: [
-      'gloss-studio-01.jpeg', 'gloss-studio-02.jpeg', 'gloss-studio-03.jpeg',
-      'gloss-studio-04.jpeg', 'gloss-studio-05.jpeg', 'gloss-studio-06.jpeg',
-      'gloss-studio-07.jpeg', 'gloss-studio-08.jpeg', 'gloss-studio-09.jpeg',
-      'gloss-studio-10.jpeg', 'gloss-studio-11.jpeg', 'gloss-studio-12.jpeg',
-      'gloss-studio-13.jpeg', 'gloss-studio-14.jpeg',
+      'gloss-studio-01.jpeg',
+      'gloss-studio-02.jpeg',
+      'gloss-studio-03.jpeg',
+      'gloss-studio-04.jpeg',
+      'gloss-studio-05.jpeg',
+      'gloss-studio-06.jpeg',
+      'gloss-studio-07.jpeg',
+      'gloss-studio-08.jpeg',
+      'gloss-studio-09.jpeg',
+      'gloss-studio-10.jpeg',
+      'gloss-studio-11.jpeg',
+      'gloss-studio-12.jpeg',
+      'gloss-studio-13.jpeg',
+      'gloss-studio-14.jpeg',
     ],
     coverIndex: 4, // gloss-studio-05 was the cover
   },
@@ -127,8 +153,10 @@ const services = [
     icon: { provider: 'lu', name: 'LuHome' },
     title_es: 'Remodelación Residencial',
     title_en: 'Residential Remodeling',
-    description_es: 'Demolición, hormigón, plomería, electricidad, cocinas y baños. Transformamos espacios residenciales con acabados de primera calidad.',
-    description_en: 'Demolition, concrete, plumbing, electrical, kitchens and bathrooms. We transform residential spaces with premium finishes.',
+    description_es:
+      'Demolición, hormigón, plomería, electricidad, cocinas y baños. Transformamos espacios residenciales con acabados de primera calidad.',
+    description_en:
+      'Demolition, concrete, plumbing, electrical, kitchens and bathrooms. We transform residential spaces with premium finishes.',
     folder: 'residential',
     media: [
       { file: 'residential-01.jpeg', type: 'image' },
@@ -148,8 +176,10 @@ const services = [
     icon: { provider: 'lu', name: 'LuBuilding2' },
     title_es: 'Remodelación Comercial',
     title_en: 'Commercial Remodeling',
-    description_es: 'Restaurantes, rooftops, oficinas y proyectos gubernamentales. Soluciones comerciales que elevan tu marca.',
-    description_en: 'Restaurants, rooftops, offices and government projects. Commercial solutions that elevate your brand.',
+    description_es:
+      'Restaurantes, rooftops, oficinas y proyectos gubernamentales. Soluciones comerciales que elevan tu marca.',
+    description_en:
+      'Restaurants, rooftops, offices and government projects. Commercial solutions that elevate your brand.',
     media: [
       { folder: 'la-fresqueria', file: 'la-fresqueria-03.jpeg', type: 'image' },
       { folder: 'tres-monos', file: 'tres-monos-01.jpeg', type: 'image' },
@@ -162,8 +192,10 @@ const services = [
     icon: { provider: 'lu', name: 'LuLayers' },
     title_es: 'Acabados Arquitectónicos',
     title_en: 'Architectural Finishes',
-    description_es: 'Microcemento, estuco veneciano y recubrimientos especiales. Técnicas europeas de acabado para superficies únicas.',
-    description_en: 'Microcement, Venetian plaster and specialty coatings. European finishing techniques for unique surfaces.',
+    description_es:
+      'Microcemento, estuco veneciano y recubrimientos especiales. Técnicas europeas de acabado para superficies únicas.',
+    description_en:
+      'Microcement, Venetian plaster and specialty coatings. European finishing techniques for unique surfaces.',
     folder: 'textures',
     media: [
       { file: 'textures-01.jpeg', type: 'image' },
@@ -180,8 +212,10 @@ const services = [
     icon: { provider: 'lu', name: 'LuPaintRoller' },
     title_es: 'Revestimientos Especiales',
     title_en: 'Specialty Coatings',
-    description_es: 'Paredes de roca y ladrillo con certificación Inimitez, texturas personalizadas y sistemas decorativos europeos.',
-    description_en: 'Rock and brick walls with Inimitez certification, custom textures and European decorative systems.',
+    description_es:
+      'Paredes de roca y ladrillo con certificación Inimitez, texturas personalizadas y sistemas decorativos europeos.',
+    description_en:
+      'Rock and brick walls with Inimitez certification, custom textures and European decorative systems.',
     folder: 'specialty-coatings',
     media: [
       { file: 'specialty-coatings-01.jpeg', type: 'image' },
@@ -196,8 +230,10 @@ const services = [
     icon: { provider: 'lu', name: 'LuLandmark' },
     title_es: 'Proyectos Públicos',
     title_en: 'Public Projects',
-    description_es: 'Cielos rasos acústicos, especificaciones gubernamentales y presupuestos por fases para proyectos de gran escala.',
-    description_en: 'Acoustic ceilings, government specifications and phased budgeting for large-scale projects.',
+    description_es:
+      'Cielos rasos acústicos, especificaciones gubernamentales y presupuestos por fases para proyectos de gran escala.',
+    description_en:
+      'Acoustic ceilings, government specifications and phased budgeting for large-scale projects.',
     folder: 'public-sector',
     media: [
       { file: 'public-sector-01.jpeg', type: 'image' },
@@ -217,30 +253,42 @@ const certifications = [
     order: 1,
     icon: { provider: 'lu', name: 'LuSparkles' },
     accent: 'from-ms-gold/10 to-transparent',
-    title_es: 'Inimitez Academy', title_en: 'Inimitez Academy',
-    institution_es: 'España', institution_en: 'Spain',
-    description_es: 'Especialización en roca y ladrillo decorativo, sistemas decorativos europeos con técnicas avanzadas de aplicación.',
-    description_en: 'Specialization in decorative rock and brick, European decorative systems with advanced application techniques.',
+    title_es: 'Inimitez Academy',
+    title_en: 'Inimitez Academy',
+    institution_es: 'España',
+    institution_en: 'Spain',
+    description_es:
+      'Especialización en roca y ladrillo decorativo, sistemas decorativos europeos con técnicas avanzadas de aplicación.',
+    description_en:
+      'Specialization in decorative rock and brick, European decorative systems with advanced application techniques.',
   },
   {
     key: 'ambience',
     order: 2,
     icon: { provider: 'lu', name: 'LuPaintRoller' },
     accent: 'from-ms-pearl/5 to-transparent',
-    title_es: 'Ambience Architectural Coatings', title_en: 'Ambience Architectural Coatings',
-    institution_es: 'Recubrimientos Profesionales', institution_en: 'Professional Coatings',
-    description_es: 'Acabados profesionales, superficies continuas, primers y selladores. Certificación en sistemas de recubrimiento arquitectónico.',
-    description_en: 'Professional finishes, continuous surfaces, primers and sealers. Certified in architectural coating systems.',
+    title_es: 'Ambience Architectural Coatings',
+    title_en: 'Ambience Architectural Coatings',
+    institution_es: 'Recubrimientos Profesionales',
+    institution_en: 'Professional Coatings',
+    description_es:
+      'Acabados profesionales, superficies continuas, primers y selladores. Certificación en sistemas de recubrimiento arquitectónico.',
+    description_en:
+      'Professional finishes, continuous surfaces, primers and sealers. Certified in architectural coating systems.',
   },
   {
     key: 'osha',
     order: 3,
     icon: { provider: 'lu', name: 'LuHardHat' },
     accent: 'from-ms-gold/8 to-transparent',
-    title_es: 'OSHA 30 Horas', title_en: 'OSHA 30-Hour',
-    institution_es: 'Seguridad en Construcción', institution_en: 'Construction Safety',
-    description_es: 'Estándares federales de seguridad, preparación para proyectos gubernamentales y cumplimiento normativo integral.',
-    description_en: 'Federal safety standards, government project readiness and comprehensive regulatory compliance.',
+    title_es: 'OSHA 30 Horas',
+    title_en: 'OSHA 30-Hour',
+    institution_es: 'Seguridad en Construcción',
+    institution_en: 'Construction Safety',
+    description_es:
+      'Estándares federales de seguridad, preparación para proyectos gubernamentales y cumplimiento normativo integral.',
+    description_en:
+      'Federal safety standards, government project readiness and comprehensive regulatory compliance.',
   },
 ];
 
@@ -253,24 +301,30 @@ const testimonials = [
     name: 'María García',
     project_es: 'Remodelación Residencial — Guaynabo',
     project_en: 'Residential Remodel — Guaynabo',
-    quote_es: 'MasterSpace transformó completamente nuestra casa. El nivel de detalle y la calidad de los acabados superó todas nuestras expectativas.',
-    quote_en: 'MasterSpace completely transformed our home. The level of detail and quality of finishes exceeded all our expectations.',
+    quote_es:
+      'MasterSpace transformó completamente nuestra casa. El nivel de detalle y la calidad de los acabados superó todas nuestras expectativas.',
+    quote_en:
+      'MasterSpace completely transformed our home. The level of detail and quality of finishes exceeded all our expectations.',
   },
   {
     order: 2,
     name: 'Carlos Rivera',
     project_es: 'Restaurante — San Juan',
     project_en: 'Restaurant — San Juan',
-    quote_es: 'Profesionales de primera. El trabajo de estuco veneciano que realizaron en nuestro restaurante le dio un look completamente premium.',
-    quote_en: 'Top-notch professionals. The Venetian plaster work they did in our restaurant gave it a completely premium look.',
+    quote_es:
+      'Profesionales de primera. El trabajo de estuco veneciano que realizaron en nuestro restaurante le dio un look completamente premium.',
+    quote_en:
+      'Top-notch professionals. The Venetian plaster work they did in our restaurant gave it a completely premium look.',
   },
   {
     order: 3,
     name: 'Ana Martínez',
     project_es: 'Revestimiento Comercial — Condado',
     project_en: 'Commercial Coating — Condado',
-    quote_es: 'Su conocimiento en técnicas europeas de acabados es impresionante. Entregaron a tiempo y con una calidad excepcional.',
-    quote_en: 'Their knowledge of European finishing techniques is impressive. They delivered on time and with exceptional quality.',
+    quote_es:
+      'Su conocimiento en técnicas europeas de acabados es impresionante. Entregaron a tiempo y con una calidad excepcional.',
+    quote_en:
+      'Their knowledge of European finishing techniques is impressive. They delivered on time and with exceptional quality.',
   },
 ];
 

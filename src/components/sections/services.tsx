@@ -1,23 +1,43 @@
-import useEmblaCarousel from 'embla-carousel-react';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import useEmblaCarousel from 'embla-carousel-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  Building2, ChevronLeft, ChevronRight, Home, Landmark,
-  Layers, PaintRoller, Plus, type LucideIcon,
+  Building2,
+  ChevronLeft,
+  ChevronRight,
+  Home,
+  Landmark,
+  Layers,
+  type LucideIcon,
+  PaintRoller,
+  Plus,
 } from 'lucide-react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 
 import { useSanity } from '@/hooks/use-sanity';
+import {
+  type SanityMediaItem,
+  type SanityService,
+  fetchServices,
+  localized,
+  urlFor,
+} from '@/lib/sanity';
 import { cn } from '@/lib/utils';
-import { fetchServices, localized, urlFor, type SanityMediaItem, type SanityService } from '@/lib/sanity';
 
 const iconMap: Record<string, LucideIcon> = {
-  Home, Building2, Layers, PaintRoller, Landmark,
-  LuHome: Home, LuBuilding2: Building2, LuLayers: Layers,
-  LuPaintRoller: PaintRoller, LuLandmark: Landmark,
+  Home,
+  Building2,
+  Layers,
+  PaintRoller,
+  Landmark,
+  LuHome: Home,
+  LuBuilding2: Building2,
+  LuLayers: Layers,
+  LuPaintRoller: PaintRoller,
+  LuLandmark: Landmark,
 };
 
 function resolveIcon(icon: SanityService['icon']): LucideIcon {
@@ -53,7 +73,9 @@ function ServiceCarousel({ media, alt }: { media: SanityMediaItem[]; alt: string
   useEffect(() => {
     if (!emblaApi) return;
     emblaApi.on('select', onSelect);
-    return () => { emblaApi.off('select', onSelect); };
+    return () => {
+      emblaApi.off('select', onSelect);
+    };
   }, [emblaApi, onSelect]);
 
   const imageSlides = media
@@ -98,14 +120,14 @@ function ServiceCarousel({ media, alt }: { media: SanityMediaItem[]; alt: string
         </div>
         <button
           onClick={() => emblaApi?.scrollPrev()}
-          className="absolute top-1/2 left-2 -translate-y-1/2 bg-background/70 p-1 text-foreground backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+          className="bg-background/70 text-foreground hover:bg-primary hover:text-primary-foreground absolute top-1/2 left-2 -translate-y-1/2 p-1 backdrop-blur-sm transition-colors"
           aria-label="Previous"
         >
           <ChevronLeft size={16} />
         </button>
         <button
           onClick={() => emblaApi?.scrollNext()}
-          className="absolute top-1/2 right-2 -translate-y-1/2 bg-background/70 p-1 text-foreground backdrop-blur-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+          className="bg-background/70 text-foreground hover:bg-primary hover:text-primary-foreground absolute top-1/2 right-2 -translate-y-1/2 p-1 backdrop-blur-sm transition-colors"
           aria-label="Next"
         >
           <ChevronRight size={16} />
@@ -119,7 +141,7 @@ function ServiceCarousel({ media, alt }: { media: SanityMediaItem[]; alt: string
             aria-label={`Go to slide ${i + 1}`}
             className={cn(
               'h-px transition-all duration-300',
-              i === selectedIndex ? 'w-8 bg-primary' : 'w-4 bg-border hover:bg-muted-foreground'
+              i === selectedIndex ? 'bg-primary w-8' : 'bg-border hover:bg-muted-foreground w-4'
             )}
           />
         ))}
@@ -138,26 +160,29 @@ function ServiceCarousel({ media, alt }: { media: SanityMediaItem[]; alt: string
 export function Services() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'es' | 'en';
-  const { data: services, loading } = useSanity(useCallback(() => fetchServices(), []), 'services');
+  const { data: services, loading } = useSanity(
+    useCallback(() => fetchServices(), []),
+    'services'
+  );
   const [active, setActive] = useState<string | null>(null);
 
   if (loading || !services) {
     return (
-      <section id="servicios" className="px-6 py-24 md:py-36 md:px-12">
+      <section id="servicios" className="px-6 py-24 md:px-12 md:py-36">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 flex items-start gap-8 md:mb-24">
             <div className="pt-2">
-              <span className="font-sans text-sm tracking-[0.2em] text-primary uppercase">
+              <span className="text-primary font-sans text-sm tracking-[0.2em] uppercase">
                 {t('nav.services')}
               </span>
             </div>
-            <h2 className="font-display max-w-xl text-3xl leading-tight text-foreground md:text-5xl">
+            <h2 className="font-display text-foreground max-w-xl text-3xl leading-tight md:text-5xl">
               {t('services.title')}
             </h2>
           </div>
           <div className="space-y-6">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="h-20 animate-pulse bg-secondary" />
+              <div key={i} className="bg-secondary h-20 animate-pulse" />
             ))}
           </div>
         </div>
@@ -166,15 +191,15 @@ export function Services() {
   }
 
   return (
-    <section id="servicios" className="px-6 py-24 md:py-36 md:px-12">
+    <section id="servicios" className="px-6 py-24 md:px-12 md:py-36">
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 flex items-start gap-8 md:mb-24">
           <div className="pt-2">
-            <span className="font-sans text-sm tracking-[0.2em] text-primary uppercase">
+            <span className="text-primary font-sans text-sm tracking-[0.2em] uppercase">
               {t('nav.services')}
             </span>
           </div>
-          <h2 className="font-display max-w-xl text-3xl leading-tight text-foreground md:text-5xl">
+          <h2 className="font-display text-foreground max-w-xl text-3xl leading-tight md:text-5xl">
             {t('services.title')}
           </h2>
         </div>
@@ -194,7 +219,7 @@ export function Services() {
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="h-px w-full bg-border" />
+                <div className="bg-border h-px w-full" />
 
                 <button
                   className="group w-full cursor-pointer py-7 text-left md:py-9"
@@ -204,7 +229,7 @@ export function Services() {
                   <div className="flex items-center gap-4 md:gap-10">
                     <span
                       className={cn(
-                        'font-sans w-10 shrink-0 text-sm tabular-nums transition-colors duration-300',
+                        'w-10 shrink-0 font-sans text-sm tabular-nums transition-colors duration-300',
                         isOpen ? 'text-primary' : 'text-muted-foreground'
                       )}
                     >
@@ -214,7 +239,9 @@ export function Services() {
                     <span
                       className={cn(
                         'transition-colors duration-300',
-                        isOpen ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
+                        isOpen
+                          ? 'text-primary'
+                          : 'text-muted-foreground group-hover:text-foreground'
                       )}
                     >
                       <Icon size={22} strokeWidth={1.5} />
@@ -231,8 +258,8 @@ export function Services() {
 
                     <span
                       className={cn(
-                        'ml-auto shrink-0 text-muted-foreground transition-transform duration-500',
-                        isOpen ? 'rotate-45 text-primary' : 'group-hover:text-foreground'
+                        'text-muted-foreground ml-auto shrink-0 transition-transform duration-500',
+                        isOpen ? 'text-primary rotate-45' : 'group-hover:text-foreground'
                       )}
                       aria-hidden="true"
                     >
@@ -245,7 +272,7 @@ export function Services() {
                     initial={{ scaleX: 0 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                     style={{ originX: 0 }}
-                    className="mt-3 h-px bg-primary"
+                    className="bg-primary mt-3 h-px"
                   />
                 </button>
 
@@ -259,13 +286,15 @@ export function Services() {
                       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                       className="overflow-hidden"
                     >
-                      <div className={cn(
-                        'pb-10 md:pl-30',
-                        service.media?.length > 0
-                          ? 'flex flex-col gap-6 md:flex-row md:items-start md:gap-12'
-                          : ''
-                      )}>
-                        <p className="font-body text-base leading-relaxed text-muted-foreground md:max-w-2xl">
+                      <div
+                        className={cn(
+                          'pb-10 md:pl-30',
+                          service.media?.length > 0
+                            ? 'flex flex-col gap-6 md:flex-row md:items-start md:gap-12'
+                            : ''
+                        )}
+                      >
+                        <p className="font-body text-muted-foreground text-base leading-relaxed md:max-w-2xl">
                           {description}
                         </p>
                         {service.media?.length > 0 && (
@@ -278,7 +307,7 @@ export function Services() {
               </motion.div>
             );
           })}
-          <div className="h-px w-full bg-border" />
+          <div className="bg-border h-px w-full" />
         </div>
       </div>
     </section>

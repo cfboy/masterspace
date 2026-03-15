@@ -1,8 +1,9 @@
-import { Card, Flex, Heading, Stack, Text, Grid, Button } from '@sanity/ui';
-import { HomeIcon, CogIcon, StarIcon, UsersIcon, LaunchIcon } from '@sanity/icons';
-import { useClient } from 'sanity';
 import { useEffect, useState } from 'react';
 import type { ComponentType } from 'react';
+
+import { CogIcon, HomeIcon, LaunchIcon, StarIcon, UsersIcon } from '@sanity/icons';
+import { Button, Card, Flex, Grid, Heading, Stack, Text } from '@sanity/ui';
+import { useClient } from 'sanity';
 
 interface ContentSection {
   title: string;
@@ -64,11 +65,7 @@ export default function StudioHome() {
       <Stack space={6}>
         {/* Header */}
         <Flex align="center" gap={3}>
-          <img
-            src="/ms-logo.svg"
-            alt="MasterSpace"
-            style={{ height: 36, width: 'auto' }}
-          />
+          <img src="/ms-logo.svg" alt="MasterSpace" style={{ height: 36, width: 'auto' }} />
           <Stack space={2}>
             <Heading size={3}>MasterSpace CMS</Heading>
             <Text size={1} muted>
@@ -84,13 +81,7 @@ export default function StudioHome() {
             const count = counts[section.type];
 
             return (
-              <Card
-                key={section.type}
-                padding={4}
-                radius={3}
-                shadow={1}
-                tone="default"
-              >
+              <Card key={section.type} padding={4} radius={3} shadow={1} tone="default">
                 <Stack space={4}>
                   <Flex align="center" gap={3}>
                     <Text size={3}>

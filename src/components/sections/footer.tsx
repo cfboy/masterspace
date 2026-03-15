@@ -46,7 +46,7 @@ export function Footer() {
             </p>
             <div className="flex flex-col items-center gap-3 md:items-start">
               <a
-                href={biz.phoneHref}
+                href={`tel:+1${biz.phone.replace(/\D/g, '')}`}
                 className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
               >
                 {biz.phone}

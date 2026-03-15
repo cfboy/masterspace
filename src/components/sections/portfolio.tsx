@@ -2,17 +2,20 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Lightbox from 'yet-another-react-lightbox';
-import Video from 'yet-another-react-lightbox/plugins/video';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
+import Video from 'yet-another-react-lightbox/plugins/video';
 import 'yet-another-react-lightbox/styles.css';
 
 import { useSanity } from '@/hooks/use-sanity';
-import { cn } from '@/lib/utils';
 import {
-  fetchProjects, localized, urlFor,
-  type SanityMediaItem, type SanityProject,
+  type SanityMediaItem,
+  type SanityProject,
+  fetchProjects,
+  localized,
+  urlFor,
 } from '@/lib/sanity';
+import { cn } from '@/lib/utils';
 
 function isVideo(item: SanityMediaItem): boolean {
   if (item._type === 'file') return true;
@@ -37,7 +40,10 @@ function buildSlides(album: SanityMediaItem[]) {
 export function Portfolio() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'es' | 'en';
-  const { data: projects, loading } = useSanity(useCallback(() => fetchProjects(), []), 'projects');
+  const { data: projects, loading } = useSanity(
+    useCallback(() => fetchProjects(), []),
+    'projects'
+  );
 
   const [lightboxProject, setLightboxProject] = useState<SanityProject | null>(null);
   const [tappedKey, setTappedKey] = useState<string | null>(null);
@@ -119,9 +125,7 @@ export function Portfolio() {
                     <p className="text-ms-gold font-sans text-xs tracking-[0.2em] uppercase">
                       {location}
                     </p>
-                    <h4 className="font-display text-ms-white text-base md:text-lg">
-                      {title}
-                    </h4>
+                    <h4 className="font-display text-ms-white text-base md:text-lg">{title}</h4>
                     <p className="text-ms-ash mt-1 font-sans text-xs">
                       {t('portfolio.photoCount', { count: albumCount })}
                     </p>
