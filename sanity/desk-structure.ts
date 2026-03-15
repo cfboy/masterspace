@@ -1,31 +1,43 @@
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list';
 import { HomeIcon, CogIcon, StarIcon, UsersIcon } from '@sanity/icons';
 import type { StructureBuilder } from 'sanity/structure';
+import type { ConfigContext } from 'sanity';
 
-export const structure = (S: StructureBuilder) =>
+export const structure = (S: StructureBuilder, context: ConfigContext) =>
   S.list()
     .title('MasterSpace CMS')
     .items([
-      S.listItem()
-        .title('Proyectos')
-        .icon(HomeIcon)
-        .child(S.documentTypeList('project').title('Proyectos')),
+      orderableDocumentListDeskItem({
+        type: 'project',
+        title: 'Proyectos',
+        icon: HomeIcon,
+        S,
+        context,
+      }),
 
-      S.listItem()
-        .title('Servicios')
-        .icon(CogIcon)
-        .child(S.documentTypeList('service').title('Servicios')),
+      orderableDocumentListDeskItem({
+        type: 'service',
+        title: 'Servicios',
+        icon: CogIcon,
+        S,
+        context,
+      }),
 
-      S.listItem()
-        .title('Certificaciones')
-        .icon(StarIcon)
-        .child(
-          S.documentTypeList('certification').title('Certificaciones'),
-        ),
+      orderableDocumentListDeskItem({
+        type: 'certification',
+        title: 'Certificaciones',
+        icon: StarIcon,
+        S,
+        context,
+      }),
 
       S.divider(),
 
-      S.listItem()
-        .title('Testimonios')
-        .icon(UsersIcon)
-        .child(S.documentTypeList('testimonial').title('Testimonios')),
+      orderableDocumentListDeskItem({
+        type: 'testimonial',
+        title: 'Testimonios',
+        icon: UsersIcon,
+        S,
+        context,
+      }),
     ]);

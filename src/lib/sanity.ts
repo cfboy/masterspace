@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
+import { createImageUrlBuilder } from '@sanity/image-url';
 import type { SanityImageSource } from '@sanity/image-url';
 
 export const sanityClient = createClient({
@@ -9,7 +9,7 @@ export const sanityClient = createClient({
   useCdn: true,
 });
 
-const builder = imageUrlBuilder(sanityClient);
+const builder = createImageUrlBuilder(sanityClient);
 
 export function urlFor(source: SanityImageSource) {
   return builder.image(source);
@@ -29,7 +29,6 @@ export function localized(doc: any, field: string, lang: Lang): string {
 export interface SanityProject {
   _id: string;
   key: string;
-  order: number;
   title_es: string;
   title_en: string;
   location_es: string;
@@ -41,7 +40,6 @@ export interface SanityProject {
 export interface SanityService {
   _id: string;
   key: string;
-  order: number;
   icon: SanityIconPicker;
   title_es: string;
   title_en: string;
@@ -67,7 +65,6 @@ export interface SanityMediaItem {
 export interface SanityCertification {
   _id: string;
   key: string;
-  order: number;
   icon: SanityIconPicker;
   accent: string;
   title_es: string;
@@ -80,7 +77,6 @@ export interface SanityCertification {
 
 export interface SanityTestimonial {
   _id: string;
-  order: number;
   name: string;
   project_es: string;
   project_en: string;
@@ -90,8 +86,8 @@ export interface SanityTestimonial {
 
 // ---------- Queries ----------
 
-const PROJECT_QUERY = `*[_type == "project"] | order(order asc) {
-  _id, key, order,
+const PROJECT_QUERY = `*[_type == "project"] | order(orderRank asc) {
+  _id, key,
   title_es, title_en,
   location_es, location_en,
   cover,
@@ -107,8 +103,8 @@ const PROJECT_QUERY = `*[_type == "project"] | order(order asc) {
   }
 }`;
 
-const SERVICE_QUERY = `*[_type == "service"] | order(order asc) {
-  _id, key, order, icon,
+const SERVICE_QUERY = `*[_type == "service"] | order(orderRank asc) {
+  _id, key, icon,
   title_es, title_en,
   description_es, description_en,
   media[] {
@@ -123,15 +119,15 @@ const SERVICE_QUERY = `*[_type == "service"] | order(order asc) {
   }
 }`;
 
-const CERTIFICATION_QUERY = `*[_type == "certification"] | order(order asc) {
-  _id, key, order, icon, accent,
+const CERTIFICATION_QUERY = `*[_type == "certification"] | order(orderRank asc) {
+  _id, key, icon, accent,
   title_es, title_en,
   institution_es, institution_en,
   description_es, description_en
 }`;
 
-const TESTIMONIAL_QUERY = `*[_type == "testimonial"] | order(order asc) {
-  _id, order, name,
+const TESTIMONIAL_QUERY = `*[_type == "testimonial"] | order(orderRank asc) {
+  _id, name,
   project_es, project_en,
   quote_es, quote_en
 }`;
