@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 const root = document.getElementById('root')!;
 
-if (window.location.pathname.startsWith('/studio')) {
+if (window.location.pathname.startsWith('/admin')) {
   // Lazy-load Studio — keeps it out of the main site bundle
   import('./studio/StudioPage').then(({ default: StudioPage }) => {
     createRoot(root).render(

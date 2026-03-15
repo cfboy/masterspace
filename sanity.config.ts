@@ -12,7 +12,7 @@ export default defineConfig({
   title: 'MasterSpace CMS',
   projectId: 'ls1g2tok',
   dataset: 'production',
-  basePath: '/studio',
+  basePath: '/admin',
   icon: StudioLogo,
   theme: masterSpaceTheme,
   plugins: [structureTool({ structure }), visionTool(), iconPicker()],
