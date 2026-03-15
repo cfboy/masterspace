@@ -84,6 +84,36 @@ export interface SanityTestimonial {
   quote_en: string;
 }
 
+export interface SanityBusinessInfo {
+  phone: string;
+  phoneHref: string;
+  email: string;
+  location: string;
+  instagram?: string;
+  facebook?: string;
+  founderName: string;
+  founderRole_es: string;
+  founderRole_en: string;
+  yearsExperience: number;
+  projectsCompleted: number;
+}
+
+// ---------- Defaults (fallback when CMS is empty) ----------
+
+export const DEFAULT_BUSINESS_INFO: SanityBusinessInfo = {
+  phone: '(787) 546-7168',
+  phoneHref: 'tel:+17875467168',
+  email: 'masterspacellc@gmail.com',
+  location: 'Puerto Rico',
+  instagram: 'https://www.instagram.com/masterspacellc/',
+  facebook: 'https://www.facebook.com/masterspacellc/',
+  founderName: 'Benjamin Negrón',
+  founderRole_es: 'Fundador & Director',
+  founderRole_en: 'Founder & Director',
+  yearsExperience: 10,
+  projectsCompleted: 200,
+};
+
 // ---------- Queries ----------
 
 const PROJECT_QUERY = `*[_type == "project"] | order(orderRank asc) {
@@ -132,6 +162,14 @@ const TESTIMONIAL_QUERY = `*[_type == "testimonial"] | order(orderRank asc) {
   quote_es, quote_en
 }`;
 
+const BUSINESS_INFO_QUERY = `*[_type == "businessInfo" && _id == "businessInfo"][0] {
+  phone, phoneHref, email, location,
+  instagram, facebook,
+  founderName, founderRole_es, founderRole_en,
+  yearsExperience, projectsCompleted,
+  "certificationsCount": count(*[_type == "certification"])
+}`;
+
 // ---------- Fetchers ----------
 
 export async function fetchProjects(): Promise<SanityProject[]> {
@@ -148,4 +186,9 @@ export async function fetchCertifications(): Promise<SanityCertification[]> {
 
 export async function fetchTestimonials(): Promise<SanityTestimonial[]> {
   return sanityClient.fetch(TESTIMONIAL_QUERY);
+}
+
+export async function fetchBusinessInfo(): Promise<SanityBusinessInfo> {
+  const result = await sanityClient.fetch<SanityBusinessInfo | null>(BUSINESS_INFO_QUERY);
+  return result ?? DEFAULT_BUSINESS_INFO;
 }

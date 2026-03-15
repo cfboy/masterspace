@@ -3,33 +3,33 @@ import { defineField, defineType } from 'sanity';
 
 export const testimonial = defineType({
   name: 'testimonial',
-  title: 'Testimonio',
+  title: 'Testimonial',
   type: 'document',
   fieldsets: [
-    { name: 'es', title: 'Español', options: { collapsible: true, collapsed: false } },
+    { name: 'es', title: 'Spanish', options: { collapsible: true, collapsed: false } },
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
     orderRankField({ type: 'testimonial' }),
     defineField({
       name: 'name',
-      title: 'Nombre del Cliente',
+      title: 'Client Name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
 
-    // --- Español ---
+    // --- Spanish ---
     defineField({
       name: 'project_es',
-      title: 'Proyecto',
+      title: 'Project',
       type: 'string',
       fieldset: 'es',
-      description: 'Ej: "Remodelación Residencial — Guaynabo"',
+      description: 'E.g. "Residential Remodel — Guaynabo"',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'quote_es',
-      title: 'Testimonio',
+      title: 'Testimonial',
       type: 'text',
       fieldset: 'es',
       validation: (rule) => rule.required(),

@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
 
 import { Logo } from '@/components/ui/logo';
-import { CONTACT_INFO, NAV_LINKS, SOCIAL_LINKS } from '@/lib/constants';
+import { useBusinessInfo } from '@/hooks/use-business-info';
+import { NAV_LINKS } from '@/lib/constants';
 
 export function Footer() {
   const { t } = useTranslation();
+  const biz = useBusinessInfo();
 
   return (
     <footer className="bg-ms-black px-6 md:px-12">
@@ -44,34 +46,38 @@ export function Footer() {
             </p>
             <div className="flex flex-col items-center gap-3 md:items-start">
               <a
-                href={CONTACT_INFO.phoneHref}
+                href={biz.phoneHref}
                 className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
               >
-                {CONTACT_INFO.phone}
+                {biz.phone}
               </a>
               <a
-                href={CONTACT_INFO.emailHref}
+                href={`mailto:${biz.email}`}
                 className="font-body text-ms-ash hover:text-ms-gold text-base transition-colors"
               >
-                {CONTACT_INFO.email}
+                {biz.email}
               </a>
               <div className="mt-2 flex gap-4">
-                <a
-                  href={SOCIAL_LINKS.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
-                >
-                  Instagram
-                </a>
-                <a
-                  href={SOCIAL_LINKS.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
-                >
-                  Facebook
-                </a>
+                {biz.instagram && (
+                  <a
+                    href={biz.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
+                  >
+                    Instagram
+                  </a>
+                )}
+                {biz.facebook && (
+                  <a
+                    href={biz.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-ms-slate hover:text-ms-gold font-sans text-xs tracking-wide uppercase transition-colors"
+                  >
+                    Facebook
+                  </a>
+                )}
               </div>
             </div>
           </div>

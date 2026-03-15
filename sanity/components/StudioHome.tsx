@@ -13,28 +13,28 @@ interface ContentSection {
 
 const SECTIONS: ContentSection[] = [
   {
-    title: 'Proyectos',
+    title: 'Projects',
     type: 'project',
     icon: HomeIcon,
-    description: 'Portafolio de proyectos completados',
+    description: 'Completed project portfolio',
   },
   {
-    title: 'Servicios',
+    title: 'Services',
     type: 'service',
     icon: CogIcon,
-    description: 'Servicios ofrecidos por la empresa',
+    description: 'Services offered by the company',
   },
   {
-    title: 'Certificaciones',
+    title: 'Certifications',
     type: 'certification',
     icon: StarIcon,
-    description: 'Certificaciones y acreditaciones',
+    description: 'Certifications and accreditations',
   },
   {
-    title: 'Testimonios',
+    title: 'Testimonials',
     type: 'testimonial',
     icon: UsersIcon,
-    description: 'Testimonios de clientes',
+    description: 'Client testimonials',
   },
 ];
 
@@ -72,7 +72,7 @@ export default function StudioHome() {
           <Stack space={2}>
             <Heading size={3}>MasterSpace CMS</Heading>
             <Text size={1} muted>
-              Administra el contenido del sitio web
+              Manage website content
             </Text>
           </Stack>
         </Flex>
@@ -105,7 +105,7 @@ export default function StudioHome() {
                   </Flex>
                   <Flex align="center" justify="space-between">
                     <Text size={1} muted>
-                      {count !== undefined ? `${count} documento${count !== 1 ? 's' : ''}` : '…'}
+                      {count !== undefined ? `${count} document${count !== 1 ? 's' : ''}` : '…'}
                     </Text>
                   </Flex>
                 </Stack>
@@ -119,10 +119,10 @@ export default function StudioHome() {
           <Flex align="center" justify="space-between">
             <Stack space={2}>
               <Text size={1} weight="semibold">
-                Ver sitio web
+                View website
               </Text>
               <Text size={1} muted>
-                Abre el sitio en una nueva pestaña
+                Opens the site in a new tab
               </Text>
             </Stack>
             <Button
@@ -131,7 +131,7 @@ export default function StudioHome() {
               target="_blank"
               rel="noopener noreferrer"
               icon={LaunchIcon}
-              text="Abrir"
+              text="Open"
               tone="primary"
               mode="ghost"
             />

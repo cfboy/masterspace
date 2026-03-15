@@ -3,24 +3,24 @@ import { defineField, defineType } from 'sanity';
 
 export const certification = defineType({
   name: 'certification',
-  title: 'Certificación',
+  title: 'Certification',
   type: 'document',
   fieldsets: [
-    { name: 'es', title: 'Español', options: { collapsible: true, collapsed: false } },
+    { name: 'es', title: 'Spanish', options: { collapsible: true, collapsed: false } },
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
     orderRankField({ type: 'certification' }),
     defineField({
       name: 'key',
-      title: 'Clave',
+      title: 'Key',
       type: 'string',
-      description: 'Identificador único (ej: "inimitez", "osha")',
+      description: 'Unique identifier (e.g. "inimitez", "osha")',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'icon',
-      title: 'Ícono',
+      title: 'Icon',
       type: 'iconPicker',
       options: {
         providers: ['lu'],
@@ -30,36 +30,36 @@ export const certification = defineType({
     }),
     defineField({
       name: 'accent',
-      title: 'Color de Acento',
+      title: 'Accent Color',
       type: 'string',
-      description: 'Clase de gradiente Tailwind',
+      description: 'Tailwind gradient class',
       options: {
         list: [
-          { title: 'Dorado', value: 'from-ms-gold/10 to-transparent' },
-          { title: 'Perla', value: 'from-ms-pearl/5 to-transparent' },
-          { title: 'Dorado suave', value: 'from-ms-gold/8 to-transparent' },
+          { title: 'Gold', value: 'from-ms-gold/10 to-transparent' },
+          { title: 'Pearl', value: 'from-ms-pearl/5 to-transparent' },
+          { title: 'Soft Gold', value: 'from-ms-gold/8 to-transparent' },
         ],
       },
     }),
 
-    // --- Español ---
+    // --- Spanish ---
     defineField({
       name: 'title_es',
-      title: 'Título',
+      title: 'Title',
       type: 'string',
       fieldset: 'es',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'institution_es',
-      title: 'Institución',
+      title: 'Institution',
       type: 'string',
       fieldset: 'es',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description_es',
-      title: 'Descripción',
+      title: 'Description',
       type: 'text',
       fieldset: 'es',
       validation: (rule) => rule.required(),

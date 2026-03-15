@@ -3,24 +3,24 @@ import { defineField, defineType } from 'sanity';
 
 export const service = defineType({
   name: 'service',
-  title: 'Servicio',
+  title: 'Service',
   type: 'document',
   fieldsets: [
-    { name: 'es', title: 'Español', options: { collapsible: true, collapsed: false } },
+    { name: 'es', title: 'Spanish', options: { collapsible: true, collapsed: false } },
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
     orderRankField({ type: 'service' }),
     defineField({
       name: 'key',
-      title: 'Clave',
+      title: 'Key',
       type: 'string',
-      description: 'Identificador único (ej: "residential")',
+      description: 'Unique identifier (e.g. "residential")',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'icon',
-      title: 'Ícono',
+      title: 'Icon',
       type: 'iconPicker',
       options: {
         providers: ['lu'],
@@ -29,17 +29,17 @@ export const service = defineType({
       validation: (rule) => rule.required(),
     }),
 
-    // --- Español ---
+    // --- Spanish ---
     defineField({
       name: 'title_es',
-      title: 'Título',
+      title: 'Title',
       type: 'string',
       fieldset: 'es',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description_es',
-      title: 'Descripción',
+      title: 'Description',
       type: 'text',
       fieldset: 'es',
       validation: (rule) => rule.required(),
@@ -64,12 +64,12 @@ export const service = defineType({
     // --- Media ---
     defineField({
       name: 'media',
-      title: 'Galería de Medios',
+      title: 'Media Gallery',
       type: 'array',
       of: [
         {
           type: 'image',
-          title: 'Imagen',
+          title: 'Image',
           options: { hotspot: true },
         },
         {

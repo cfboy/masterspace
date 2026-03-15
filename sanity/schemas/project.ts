@@ -3,33 +3,33 @@ import { defineField, defineType } from 'sanity';
 
 export const project = defineType({
   name: 'project',
-  title: 'Proyecto',
+  title: 'Project',
   type: 'document',
   fieldsets: [
-    { name: 'es', title: 'Español', options: { collapsible: true, collapsed: false } },
+    { name: 'es', title: 'Spanish', options: { collapsible: true, collapsed: false } },
     { name: 'en', title: 'English', options: { collapsible: true, collapsed: true } },
   ],
   fields: [
     orderRankField({ type: 'project' }),
     defineField({
       name: 'key',
-      title: 'Clave',
+      title: 'Key',
       type: 'string',
-      description: 'Identificador único (ej: "laFresqueria")',
+      description: 'Unique identifier (e.g. "laFresqueria")',
       validation: (rule) => rule.required(),
     }),
 
-    // --- Español ---
+    // --- Spanish ---
     defineField({
       name: 'title_es',
-      title: 'Título',
+      title: 'Title',
       type: 'string',
       fieldset: 'es',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'location_es',
-      title: 'Ubicación',
+      title: 'Location',
       type: 'string',
       fieldset: 'es',
       validation: (rule) => rule.required(),
@@ -54,17 +54,17 @@ export const project = defineType({
     // --- Media ---
     defineField({
       name: 'cover',
-      title: 'Imagen de Portada',
+      title: 'Cover Image',
       type: 'image',
       options: { hotspot: true },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'album',
-      title: 'Álbum de Fotos y Videos',
+      title: 'Photo & Video Album',
       type: 'array',
       of: [
-        { type: 'image', title: 'Imagen', options: { hotspot: true } },
+        { type: 'image', title: 'Image', options: { hotspot: true } },
         { type: 'file', title: 'Video' },
       ],
       validation: (rule) => rule.required().min(1),

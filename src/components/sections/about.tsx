@@ -1,18 +1,27 @@
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
+import { useBusinessInfo } from '@/hooks/use-business-info';
+import { useSanity } from '@/hooks/use-sanity';
 import windowMockup from '@/assets/mockups/Window.jpg';
 import founderPhoto from '@/assets/owner.png';
-
-const stats = [
-  { value: '10+', labelKey: 'about.stat_years' },
-  { value: '200+', labelKey: 'about.stat_projects' },
-  { value: '3', labelKey: 'about.stat_certs' },
-] as const;
+import { fetchCertifications } from '@/lib/sanity';
 
 export function About() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language as 'es' | 'en';
+  const biz = useBusinessInfo();
+  const { data: certs } = useSanity(useCallback(() => fetchCertifications(), []), 'certifications');
+
+  const stats = [
+    { value: `${biz.yearsExperience}+`, labelKey: 'about.stat_years' },
+    { value: `${biz.projectsCompleted}+`, labelKey: 'about.stat_projects' },
+    { value: `${certs?.length ?? 3}`, labelKey: 'about.stat_certs' },
+  ];
+
+  const founderRole = lang === 'en' ? biz.founderRole_en : biz.founderRole_es;
 
   return (
     <section id="nosotros" className="bg-card">
@@ -37,7 +46,7 @@ export function About() {
             <div key={labelKey} className="flex-1 px-3 py-5 text-center md:px-6 md:py-8">
               <p className="font-display text-ms-gold text-2xl md:text-4xl">{value}</p>
               <p className="text-ms-ash mt-1 font-sans text-[10px] leading-tight tracking-[0.1em] uppercase md:text-xs md:tracking-[0.15em]">
-                {t(labelKey as string)}
+                {t(labelKey)}
               </p>
             </div>
           ))}
@@ -119,7 +128,7 @@ export function About() {
             <div className="flex min-h-72 flex-1 items-end justify-center pt-10 bg-ms-graphite/30">
               <img
                 src={founderPhoto}
-                alt="Benjamin Negrón"
+                alt={biz.founderName}
                 className="h-full w-full object-contain object-bottom"
               />
             </div>
@@ -127,13 +136,11 @@ export function About() {
             {/* Name bar */}
             <div className="border-border flex items-center justify-between border-t px-8 py-6">
               <div>
-                <p className="font-display text-foreground text-xl">Benjamin Negrón</p>
+                <p className="font-display text-foreground text-xl">{biz.founderName}</p>
                 <p className="text-ms-gold mt-1 font-sans text-xs tracking-[0.2em] uppercase">
-                  {t('about.founder_role')}
+                  {founderRole}
                 </p>
               </div>
-              {/* Decorative number */}
-              {/* <span className="font-display text-5xl text-border select-none">01</span> */}
             </div>
           </motion.div>
         </div>

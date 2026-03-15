@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 
 import { motion } from 'framer-motion';
 
+import { useBusinessInfo } from '@/hooks/use-business-info';
 import { useSanity } from '@/hooks/use-sanity';
-import { CONTACT_INFO, SOCIAL_LINKS } from '@/lib/constants';
 import { fetchServices, localized, type SanityService } from '@/lib/sanity';
 
 export function Contact() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language as 'es' | 'en';
   const { data: services } = useSanity(useCallback(() => fetchServices(), []), 'services');
+  const biz = useBusinessInfo();
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
@@ -64,10 +65,10 @@ export function Contact() {
                   {t('contact.phone_label')}
                 </p>
                 <a
-                  href={CONTACT_INFO.phoneHref}
+                  href={biz.phoneHref}
                   className="font-body text-base text-foreground transition-colors hover:text-primary"
                 >
-                  {CONTACT_INFO.phone}
+                  {biz.phone}
                 </a>
               </div>
               <div className="h-px bg-border" />
@@ -76,10 +77,10 @@ export function Contact() {
                   {t('contact.email_label')}
                 </p>
                 <a
-                  href={CONTACT_INFO.emailHref}
+                  href={`mailto:${biz.email}`}
                   className="font-body text-base text-foreground transition-colors hover:text-primary"
                 >
-                  {CONTACT_INFO.email}
+                  {biz.email}
                 </a>
               </div>
               <div className="h-px bg-border" />
@@ -87,12 +88,12 @@ export function Contact() {
                 <p className="mb-1 font-sans text-xs tracking-[0.15em] text-muted-foreground uppercase">
                   {t('contact.location_label')}
                 </p>
-                <p className="font-body text-foreground">{CONTACT_INFO.location}</p>
+                <p className="font-body text-foreground">{biz.location}</p>
               </div>
               <div className="h-px bg-border" />
               <div className="flex gap-6">
                 <a
-                  href={SOCIAL_LINKS.instagram}
+                  href={biz.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-sans text-xs tracking-wide text-muted-foreground transition-colors hover:text-primary uppercase"
@@ -100,7 +101,7 @@ export function Contact() {
                   Instagram
                 </a>
                 <a
-                  href={SOCIAL_LINKS.facebook}
+                  href={biz.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-sans text-xs tracking-wide text-muted-foreground transition-colors hover:text-primary uppercase"
