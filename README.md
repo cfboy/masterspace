@@ -1,73 +1,75 @@
-# React + TypeScript + Vite
+# MasterSpace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dark luxurious single-page website for **MasterSpace LLC** — a Puerto Rico construction & architectural finishes firm.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React 19, TypeScript (strict), Vite 7
+- **Styling**: Tailwind CSS v4 with custom `@theme` tokens, Framer Motion
+- **CMS**: Sanity Studio (embedded at `/studio`)
+- **i18n**: react-i18next — Spanish (default) & English
+- **Package Manager**: pnpm
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+pnpm install
+pnpm dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Site: `http://localhost:5173/`
+- Sanity Studio: `http://localhost:5173/studio`
 
-```js
-// eslint.config.js
-import reactDom from 'eslint-plugin-react-dom';
-import reactX from 'eslint-plugin-react-x';
+## Commands
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+| Command | Description |
+| --- | --- |
+| `pnpm dev` | Start dev server |
+| `pnpm build` | Type-check + production build |
+| `pnpm lint` | Run ESLint |
+| `pnpm preview` | Preview production build |
+
+## Project Structure
+
 ```
+src/
+  components/
+    sections/       # Hero, Services, About, Portfolio, etc.
+    ui/             # Reusable UI components (shadcn/ui)
+  hooks/            # use-sanity, use-theme, use-scroll-spy, etc.
+  i18n/             # Translation files (es.json, en.json)
+  lib/              # Utilities, Sanity client, constants
+  main.tsx          # Entry point — routes / vs /studio
+  App.tsx           # Main site layout
+sanity/
+  schemas/          # Sanity document schemas
+  components/       # Custom Studio components (logo)
+  desk-structure.ts # Sidebar structure with icons
+  theme.ts          # Studio theme (buildTheme from @sanity/ui)
+sanity.config.ts    # Sanity Studio configuration
+```
+
+## CMS
+
+Sanity Studio is embedded directly in the app at `/studio`. No separate process needed — `pnpm dev` serves both the site and Studio.
+
+**Schemas**: project, service, certification, testimonial — all with bilingual fields (ES/EN).
+
+**Theming**: Custom Studio theme using `@sanity/ui` `buildTheme` with orange primary hue and light/dark mode support. MasterSpace logo in the navbar.
+
+## Brand
+
+- **Palette**: Dark monochromatic with warm gold accents
+- **Accent**: `#C9A96E`
+- **Fonts**: PT Serif Caption (display), Caudex (body), Inter (utility)
+
+## Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `VITE_SANITY_PROJECT_ID` | Sanity project ID |
+| `VITE_SANITY_DATASET` | Sanity dataset (default: `production`) |
+
+## Deployment
+
+Ensure your hosting platform serves `index.html` for all routes (SPA fallback) so `/studio` works in production. Add your production domain to [Sanity CORS origins](https://www.sanity.io/manage) with credentials enabled.
