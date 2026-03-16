@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ComponentType } from 'react';
 
-import { CogIcon, HomeIcon, LaunchIcon, StarIcon, UsersIcon } from '@sanity/icons';
+import { CogIcon, ImagesIcon, LaunchIcon, StarIcon, UsersIcon } from '@sanity/icons';
 import { Button, Card, Flex, Grid, Heading, Stack, Text } from '@sanity/ui';
 import { useClient } from 'sanity';
 
@@ -10,32 +10,37 @@ interface ContentSection {
   type: string;
   icon: ComponentType;
   description: string;
+  paneId: string;
 }
 
 const SECTIONS: ContentSection[] = [
   {
     title: 'Projects',
     type: 'project',
-    icon: HomeIcon,
+    icon: ImagesIcon,
     description: 'Completed project portfolio',
+    paneId: 'orderable-project',
   },
   {
     title: 'Services',
     type: 'service',
     icon: CogIcon,
     description: 'Services offered by the company',
+    paneId: 'orderable-service',
   },
   {
     title: 'Certifications',
     type: 'certification',
     icon: StarIcon,
     description: 'Certifications and accreditations',
+    paneId: 'orderable-certification',
   },
   {
     title: 'Testimonials',
     type: 'testimonial',
     icon: UsersIcon,
     description: 'Client testimonials',
+    paneId: 'orderable-testimonial',
   },
 ];
 
@@ -81,7 +86,20 @@ export default function StudioHome() {
             const count = counts[section.type];
 
             return (
-              <Card key={section.type} padding={4} radius={3} shadow={1} tone="default">
+              <Card
+                key={section.type}
+                as="button"
+                onClick={() => {
+                  const path = `/admin/structure/${section.paneId}`;
+                  history.replaceState(null, '', path);
+                  window.dispatchEvent(new PopStateEvent('popstate'));
+                }}
+                padding={4}
+                radius={3}
+                shadow={1}
+                tone="default"
+                style={{ cursor: 'pointer', textAlign: 'left', border: 'none' }}
+              >
                 <Stack space={4}>
                   <Flex align="center" gap={3}>
                     <Text size={3}>
