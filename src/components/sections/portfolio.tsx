@@ -15,7 +15,7 @@ import {
   localized,
   urlFor,
 } from '@/lib/sanity';
-import { cn } from '@/lib/utils';
+
 
 function isVideo(item: SanityMediaItem): boolean {
   if (item._type === 'file') return true;
@@ -46,7 +46,6 @@ export function Portfolio() {
   );
 
   const [lightboxProject, setLightboxProject] = useState<SanityProject | null>(null);
-  const [tappedKey, setTappedKey] = useState<string | null>(null);
 
   if (loading || !projects) {
     return (
@@ -96,10 +95,7 @@ export function Portfolio() {
               <button
                 key={project._id}
                 className="group bg-secondary relative overflow-hidden text-left focus:outline-none"
-                onClick={() => {
-                  setTappedKey(tappedKey === project.key ? null : project.key);
-                  setLightboxProject(project);
-                }}
+                onClick={() => setLightboxProject(project)}
                 aria-label={title}
               >
                 {/* Cover image */}
@@ -115,11 +111,7 @@ export function Portfolio() {
 
                 {/* Overlay */}
                 <div
-                  className={cn(
-                    'from-ms-black/85 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4 transition-opacity duration-300',
-                    'md:opacity-0 md:group-hover:opacity-100',
-                    tappedKey === project.key ? 'opacity-100' : 'opacity-0'
-                  )}
+                  className="from-ms-black/85 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4"
                 >
                   <div>
                     <p className="text-ms-gold font-sans text-xs tracking-[0.2em] uppercase">
