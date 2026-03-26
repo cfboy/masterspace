@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Lightbox from 'yet-another-react-lightbox';
+import Captions from 'yet-another-react-lightbox/plugins/captions';
+import 'yet-another-react-lightbox/plugins/captions.css';
 import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails';
 import 'yet-another-react-lightbox/plugins/thumbnails.css';
 import Video from 'yet-another-react-lightbox/plugins/video';
@@ -23,16 +25,22 @@ function isVideo(item: SanityMediaItem): boolean {
   return false;
 }
 
-function buildSlides(album: SanityMediaItem[]) {
-  return album.map((item) => {
+function buildSlides(album: SanityMediaItem[], title: string, location: string) {
+  return album.map((item, i) => {
+    const caption = {
+      title,
+      description: `${location} — ${i + 1} / ${album.length}`,
+    };
     if (isVideo(item)) {
       return {
         type: 'video' as const,
         sources: [{ src: item.asset?.url ?? '', type: 'video/mp4' }],
+        ...caption,
       };
     }
     return {
       src: urlFor(item).width(1600).quality(85).auto('format').url(),
+      ...caption,
     };
   });
 }
@@ -111,7 +119,7 @@ export function Portfolio() {
 
                 {/* Overlay */}
                 <div
-                  className="from-ms-black/85 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4"
+                  className="from-ms-black/95 via-ms-black/75 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4"
                 >
                   <div>
                     <p className="text-ms-gold font-sans text-xs tracking-[0.2em] uppercase">
@@ -136,9 +144,17 @@ export function Portfolio() {
       <Lightbox
         open={lightboxProject !== null}
         close={() => setLightboxProject(null)}
-        slides={lightboxProject ? buildSlides(lightboxProject.album ?? []) : []}
+        slides={
+          lightboxProject
+            ? buildSlides(
+                lightboxProject.album ?? [],
+                localized(lightboxProject, 'title', lang),
+                localized(lightboxProject, 'location', lang)
+              )
+            : []
+        }
         index={0}
-        plugins={[Thumbnails, Video]}
+        plugins={[Captions, Thumbnails, Video]}
       />
     </section>
   );
