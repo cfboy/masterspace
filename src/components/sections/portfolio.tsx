@@ -111,7 +111,7 @@ export function Portfolio() {
 
                 {/* Overlay */}
                 <div
-                  className="from-ms-black/85 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4"
+                  className="from-ms-black/85 via-ms-black/20 absolute right-0 bottom-0 left-0 flex items-end justify-between bg-linear-to-t to-transparent p-4 backdrop-blur-sm"
                 >
                   <div>
                     <p className="text-ms-gold font-sans text-xs tracking-[0.2em] uppercase">
