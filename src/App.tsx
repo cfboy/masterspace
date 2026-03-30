@@ -6,7 +6,7 @@ import { Hero } from '@/components/sections/hero';
 import { Navbar } from '@/components/sections/navbar';
 import { Portfolio } from '@/components/sections/portfolio';
 import { Services } from '@/components/sections/services';
-// import { Testimonials } from '@/components/sections/testimonials';
+import { Testimonials } from '@/components/sections/testimonials';
 import { ScrollToTop } from '@/components/ui/scroll-to-top';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <About />
       <Portfolio />
       <Certifications />
-      {/* <Testimonials /> */}
+      <Testimonials />
       <Contact />
       <Footer />
       <ScrollToTop />

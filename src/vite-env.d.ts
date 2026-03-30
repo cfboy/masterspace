@@ -4,6 +4,8 @@
 interface ImportMetaEnv {
   readonly VITE_SANITY_PROJECT_ID: string;
   readonly VITE_SANITY_DATASET: string;
+  readonly VITE_FACEBOOK_PAGE_ID: string;
+  readonly VITE_FACEBOOK_PAGE_TOKEN: string;
 }
 
 interface ImportMeta {
